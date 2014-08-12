@@ -2,6 +2,8 @@
 % LaTeX paket za zavrsne, diplomske, magistarske radove i 
 % doktorske disertacije na Fakultetu strojarstva i brodogradnje, 
 % Sveucilista u Zagrebu
+% LaTeX package for bachelor, master and doctoral thesis at the Faculty of
+% Mechanical Engineering and Naval Architecture, University of Zagreb
 
 % fsbthesis.
 % Copyright 2003-2005. Milan Vrdoljak, milan.vrdoljak@fsb.hr
@@ -15,11 +17,12 @@
 % version 1999/12/01 or later.
 %
 % This program consists of the files
-% fsbthesis.sty, fsbthesis.pdf, fsb_logo.eps, suz_grb.eps,
-% fsb_logo.pdf, suz_grb.pdf, glavni.tex, uvod.tex, popozn.tex, zakljuc.tex,
-% xampl.bib, glavni.ps, glavni.pdf, readme.txt
+% fsbthesis.sty, fsbthesis.pdf, unizg_sivi_t4s.png, unizg_plavi_t4.png, 
+% fsb_logo_n.png, fsb_logo_v.png, glavni.tex, uvod.tex, teorija.tex,
+% rezultati.tex, zakljuc.tex, xampl.bib, glavni.pdf
+% (nomentbl.ist - part of nomencl package)
 
-\newcommand\FSBFileInfo{2014/03/14, ver.3.1}
+\newcommand\FSBFileInfo{2014/04/27, ver.3.1.5-hr/en}
 \typeout{-> FSB thesis style, \FSBFileInfo, brought to you by wds}
 %
 \ProvidesPackage{fsbthesis}[\FSBFileInfo]
@@ -31,15 +34,6 @@
 \RequirePackage{indentfirst}
 \RequirePackage{array}
 \RequirePackage{ifpdf}
-
-%\newif\ifpdf
-
-%\ifx\pdfoutput\undefined
-%\pdffalse % we are not running PDFLaTeX
-%\else
-%\pdfoutput=1 % we are running PDFLaTeX
-%\pdftrue
-%\fi
 
 \ifpdf
  \RequirePackage[pdftex]{graphicx}
@@ -91,7 +85,7 @@
 \newcommand{\FSBbibinst}{\fsb}
 \newcommand{\FSBbibdatumobr}{12.travnja 2003.}
 \newcommand{\FSBbibpovjerenstvo}{moje povjerenstvo}
-\newcommand{\FSBbibinstpoh}{\fsb, \newline Sveu\v{c}ili\v{s}te u Zagrebu}
+\newcommand{\FSBbibinstpoh}{\fsb, \newline \unizg}
 
 % dummy komande za pdf buduci da iz nekog razloga s pdftex-om LastPage ne radi!
 \newcommand{\FSBpdfbrojstrana}{xx}
@@ -101,6 +95,7 @@
 
 \DeclareOption{zavrsni}{\renewcommand\FSBthesisname{zavr\v sni rad}}
 \DeclareOption{diplomski}{\renewcommand\FSBthesisname{diplomski rad}}
+\DeclareOption{master}{\renewcommand\FSBthesisname{master's thesis}}
 \DeclareOption{magistarski}{\renewcommand\FSBthesisname{magistarski rad}}
 \DeclareOption{doktorat}{\renewcommand\FSBthesisname{doktorska disertacija}}
 \DeclareOption{klasik}{\renewcommand\FSBdizajn{klasik}}
@@ -136,13 +131,28 @@
   \def\alsoname{Vidi tako{\dj}er}%
   \def\proofname{Dokaz}%
   \def\zivotopisime{\v{Z}ivotopis}%
+  \def\izjavaime{Izjava}%
+  \def\popoznime{Popis oznaka}%
+  \def\nomname{Popis oznaka}%
+  \def\fsb{Fakultet strojarstva i brodogradnje}
+  \def\unizg{Sveu\v{c}ili\v{s}te u Zagrebu}
   }%
 
+% %-- prepravke engleskog nazivlja
+\addto\captionsenglish{%
+  \def\abstractname{Summary}%
+  \def\izjavaime{Statement}%
+  \def\popoznime{List of Symbols}%
+  \def\nomname{List of Symbols}%
+  \def\fsb{Faculty of Mechanical Engineering and Naval Architecture}%
+  \def\unizg{University of Zagreb}%
+   }%
+
+
 %-- korisne definicije
-\def\popoznime{Popis oznaka}
 \newcommand{\ver}{\mbox{ver.0-0}}
 \newcommand{\verzija}{\ver/\today}
-\newcommand\fsb{Fakultet strojarstva i brodogradnje}
+
 
 %-- korekcije dimenzija
 \usepackage[text={157mm,218mm}]{geometry}
@@ -178,6 +188,32 @@ vcentering
 \newcounter{brojstrana}
 \setcounter{brojstrana}{-1} %moram skinuti u broju sljedecu stranicu.
 \newcommand \thestrana{\arabic{brojstrana}}
+
+% komande za popis oznaka u nomenklaturnom stilu 
+\newcommand{\dottfill}{%
+  \leavevmode
+  \cleaders \hb@xt@ .8em{\hss.\hss}\hfill
+  \kern\z@}
+\ifpdf
+	\renewcommand{\pagedeclaration}[1]{\dottfill \hyperpage{#1}}%
+\else
+\renewcommand{\pagedeclaration}[1]{\dottfill \nobreakspace#1}%
+\fi
+\setlength{\nomitemsep}{-\parsep}
+\addtolength{\nomitemsep}{0.2pt}
+\ifthenelse{\equal{\FSBthesisname}{master's thesis}}{%
+  %\renewcommand{\nomname}{List of Symbols}
+  \renewcommand{\nomgroup}[1]{%
+	  \ifthenelse{\equal{#1}{K}}{\bigskip\par\item[\textbf{\large Abbrevatons}]}{%
+	  \ifthenelse{\equal{#1}{I}}{\bigskip\par\item[\textbf{\large Subscripts}]}{%
+	  \ifthenelse{\equal{#1}{T}}{\bigskip\par\item[\textbf{\large Accents}]}{}}} }
+  }{%
+  %\renewcommand{\nomname}{Popis oznaka}
+  \renewcommand{\nomgroup}[1]{%
+	  \ifthenelse{\equal{#1}{K}}{\bigskip\par\item[\textbf{\large Kratice}]}{%
+	  \ifthenelse{\equal{#1}{I}}{\bigskip\par\item[\textbf{\large	Indeksi}]}{%
+	  \ifthenelse{\equal{#1}{T}}{\bigskip\par\item[\textbf{\large	Akcenti}]}{}}} }
+	}%
 
 %-- dizajn stranice
 \ifthenelse{\equal{\FSBdizajn}{klasik}}{%
@@ -235,7 +271,7 @@ vcentering
     \setcounter{page}{0}
     \begin{center}
       \null
-      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \textsc{\large \unizg}\\
       \smallskip
       \textsc{\large \fsb} \\
       \vspace{4.0cm}
@@ -253,7 +289,7 @@ vcentering
     \thispagestyle{empty}
     \begin{center}
       \null
-      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \textsc{\large \unizg}\\
       \smallskip
       \textsc{\large \fsb} \\
       \vspace{4cm}
@@ -354,7 +390,7 @@ vcentering
         \setcounter{page}{0}
         \begin{center}
           \null
-      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \textsc{\large \unizg}\\
       \smallskip
       \textsc{\large \fsb} \\
           \vspace{4.7cm}
@@ -373,22 +409,22 @@ vcentering
         \thispagestyle{empty}
         \begin{center}
           \null
-          \begin{tabular}{m{2.5cm} | m{11cm}}
-			%\flushright
-			\includegraphics[width=2.5cm]{suz_grb}
-          		& %\hspace{.5cm}
-		    %\flushleft
-			\begin{minipage}{7cm}
-            %\vspace*{-1.2cm}
-		    %\flushleft
-			\includegraphics[width=2.5cm]{fsb_logo} \\%\vspace*{-1.2cm}
-			\vspace*{-1.0cm}%\vfill
-			\begin{flushleft}
-                     \textsf{Sveu\v{c}ili\v{s}te u Zagrebu}\\
-                     \vspace{-.1cm}\textsf{\fsb}
-            \end{flushleft}
-		  \end{minipage}
-          \end{tabular}\\
+		  \begin{tabular}{l|r}
+		  \begin{minipage}[b]{4.9cm}
+		    \vspace{0.2cm}
+		    \begin{center}
+		    \includegraphics[height=2.45cm]{unizg_plavi_t2}\hspace{2pt}%
+		    \includegraphics[height=2.415cm]{fsb_logo_v} %\\ \vspace{1ex}
+		    \end{center}
+		  \end{minipage} &
+		  \begin{minipage}[b]{8cm}
+		      \begin{flushleft}
+		    	  \textsf{Sveučilište u Zagrebu}\\%\vspace{.2cm}
+		    	  \textsf{Fakultet strojarstva i brodogradnje}\\
+		    	  \mbox{ }\\\vspace{.5cm}
+		      \end{flushleft}
+		  \end{minipage}\\
+		  \end{tabular}\\
           \vspace{4.0cm}
           {\LARGE \bfseries\@title \\}
           \bigskip
@@ -413,7 +449,7 @@ vcentering
         \setcounter{page}{0}
         \begin{center}
           \null
-      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \textsc{\large \unizg}\\
       \smallskip
       \textsc{\large \fsb} \\
           \vspace{4.7cm}
@@ -435,7 +471,7 @@ vcentering
           \raggedleft
           \includegraphics[width=2.5cm]{fsb_logo} & %\hspace{.5cm}
                \begin{flushleft}
-                     \textsf{Sveu\v{c}ili\v{s}te u Zagrebu}\\
+                     \textsf{\unizg}\\
                      \vspace{-.1cm}\textsf{\fsb}
                \end{flushleft}
           & %\hspace{.5cm}
@@ -459,14 +495,17 @@ vcentering
     {} %u suprotnom nista
 
 %-- promjene za zavrsni rad
-\ifthenelse{\equal{\FSBthesisname}{zavr\v sni rad}\or\equal{\FSBthesisname}{diplomski rad}}{%
+\ifthenelse{\equal{\FSBthesisname}{zavr\v sni rad}\or\equal{\FSBthesisname}{diplomski rad}\or\equal{\FSBthesisname}{master's thesis}}{%
 \renewcommand{\fsbkorice}{
     \newpage
     \thispagestyle{empty}
+	\ifthenelse{\equal{\FSBthesisname}{master's thesis}}{%
+	\selectlanguage{english}}{%
+	\selectlanguage{croatian}}
     \setcounter{page}{0}
     \begin{center}
       \null
-      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \textsc{\large \unizg}\\
       \smallskip
       \textsc{\large \fsb} \\
       \vspace{4.0cm}
@@ -485,9 +524,12 @@ vcentering
 \renewcommand{\fsbprvilist}{
     \pagebreak
     \thispagestyle{empty}
+	\ifthenelse{\equal{\FSBthesisname}{master's thesis}}{%
+	\selectlanguage{english}}{%
+	\selectlanguage{croatian}}
     \begin{center}
       \null
-      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \textsc{\large \unizg}\\
       \smallskip
       \textsc{\large \fsb} \\
       \vspace{4cm}
@@ -507,12 +549,12 @@ vcentering
       \vfill
       \textsc{Zagreb, \FSBgodina}
     \end{center}
-	\newpage
-        \thispagestyle{empty}
-        \vspace*{8cm}
-		\begin{center}%
-			\emph{--- Ovdje umetni tekst zadataka za~\FSBthesisname! --- }
-		\end{center}
+	% \newpage
+    %     \thispagestyle{empty}
+    %     \vspace*{8cm}
+	% 	\begin{center}%
+	% 		\emph{--- Ovdje umetni tekst zadataka za~\FSBthesisname! --- }
+	% 	\end{center}
 }
 \renewcommand{\fsbbiblist}{\relax}
     } % zavrsetak promjena za zavrsni rad
@@ -537,12 +579,65 @@ vcentering
     \thispagestyle{empty}
 	\null\vspace{2cm}
 	\noindent\begin{minipage}{\textwidth}%{8cm}%
-		\textrm{\bfseries \large{Izjava}}\newline\par
+		%\textrm{\bfseries \large{\izjavaime}}\newline\par
+		\ifthenelse{\equal{\FSBthesisname}{master's thesis}}{%
+		\textrm{\bfseries \large{\izjavaime~\textbar~Izjava}}\newline\par}{%
+		\textrm{\bfseries \large{\izjavaime}}\newline\par
+		}
     }%
     {%
     \end{minipage}
     \par\vspace{2.5cm} \noindent \@date \hfill \FSBautor
+	\newpage
+        \thispagestyle{empty}
+        \vspace*{8cm}
+		%\ifthenelse{\equal{\locale}{hr}}{%
+		\begin{center}%
+			\emph{--- Ovdje umetni tekst zadataka za~\FSBthesisname! --- }
+		\end{center}
+		%}{%
+		%\begin{center}%
+		%	\emph{--- Assignement for your~\FSBthesisname~should be placed here! --- }
+
+		%	\bigskip
+		%	\emph{--- Ovdje umetni tekst zadataka za~\FSBthesisname! --- }
+		%\end{center}
+		%}
     }
+
+\newenvironment{prosirenisazetak}{%
+    \newpage
+    \thispagestyle{plain}
+	\selectlanguage{croatian}
+	\ifpdf
+		\phantomsection
+	\fi
+	\ifthenelse{\equal{\FSBdizajn}{avant}}{%
+		\vspace*{1\p@}%
+		\noindent\begin{tabular}{r|l}
+			\begin{minipage}[t]{1cm}
+				\relax\vspace{3cm}	
+			\end{minipage} &
+			\hspace*{0.5cm}\begin{minipage}[t]{10cm}
+				\huge \sffamily\bfseries Prošireni sažetak \par\nobreak
+			\end{minipage}
+		\end{tabular}
+    \addcontentsline{toc}{chapter}{{\numberline {}Prošireni sažetak}}
+	\markboth{\MakeUppercase Prošireni sažetak}{\MakeUppercase Prošireni sažetak}
+    \interlinepenalty\@M
+    \vskip 80\p@
+	}{%
+	\vspace*{70\p@}
+	\textbf{\huge Prošireni sažetak}
+    \addcontentsline{toc}{chapter}{{\numberline {}Prošireni sažetak}}
+	\markboth{\MakeUppercase Prošireni sažetak}{\MakeUppercase Prošireni sažetak}
+    \interlinepenalty\@M
+    \vskip 40\p@
+	%\null\vfil
+	}%	  
+        }%
+		{\selectlanguage{english}}%{\par\vspace{2.5cm} \noindent \@date \hfill \FSBautor}
+
 
 \newenvironment{predgovor}{%
     \newpage
