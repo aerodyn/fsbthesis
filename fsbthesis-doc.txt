@@ -1,6 +1,6 @@
 FSBthesis
 Milan Vrdoljak, FSB.Aero.Dept.
-ver.3.2.2, 12.8.2014.
+ver.3.2.4, 12.8.2014.
 
 
 Općenito
@@ -271,5 +271,5 @@ Povijest
 --------
 ver.1: samo za doktorske disertacije i tadašnje magistarske radove
 ver.2: dodane opcije za diplomski rad
-ver.3: primjenjen geometry paket, dodana opcija za završni rad i za mastster's
+ver.3: primijenjen utf8 encoding, geometry paket, dodana opcija za završni rad i za master's
 thesis.
