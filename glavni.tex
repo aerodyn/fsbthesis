@@ -98,16 +98,23 @@
 \fsbbiblist
 %
 \begin{zahvala}
-	\emph{To Donald E. Knuth \dots}
+	\emph{To Donald E. Knuth \dots i druge zahvale \dots}
 \end{zahvala}
 
-\begin{predgovor}
-Ovdje \'{c}e se opisati \v{s}to me i za\v{s}to navelo na ovaj rad. Mogu\'{c}e je i
-ovdje staviti zahvale.
+\begin{izjava}
+	Izjavljujem da sam ovaj rad radio samostalno koriste\' ci ste\v cena
+	znanja tijekom studija i navedenu literaturu.
+\end{izjava}
 
-Tekst tekst tekst tekst tekst tekst.
-\end{predgovor}
-%
+%-- ako je potrebno ovdje se moze dodati predgovor (ali to je vise primjereno
+%dokt.disertacijama)
+% \begin{predgovor}
+% Ovdje \'{c}e se opisati \v{s}to me i za\v{s}to navelo na ovaj rad. Mogu\'{c}e je i
+% ovdje staviti zahvale.
+% 
+% Tekst tekst tekst tekst tekst tekst.
+% \end{predgovor}
+
 %-- sadrzaj:
 \clearpage
 \ifpdf
@@ -117,31 +124,18 @@ Tekst tekst tekst tekst tekst tekst.
 \tableofcontents
 
 %
-\begin{sazetak}
-\noindent Kratki sa\v{z}etak rada na hrvatskom jeziku: najvi\v{s}e jedna stranica
-\ldots Tekst tekst tekst tekst tekst tekst.
-\end{sazetak}
-
-%
-\begin{abstract}
-\noindent Short summary of the thesis in one foreign language (english or
-german or french): up to one page \ldots Tekst tekst tekst tekst
-tekst tekst.
-\end{abstract}
-
-%
-%%-- popis slika: ukoliko ih ima
+%-- popis slika: ukoliko ih ima
 \clearpage
 \ifpdf
 	\phantomsection
 \fi
 \addcontentsline{toc}{chapter}{{\numberline{}\listfigurename}}
 \listoffigures
-%
+
 %-- popis tablica: ukoliko ih ima
-%\clearpage
-%\addcontentsline{toc}{chapter}{{\numberline{}\listtablename}}
-%\listoftables
+\clearpage
+\addcontentsline{toc}{chapter}{{\numberline{}\listtablename}}
+\listoftables
 
 %-- ako se koristi klasicni popis oznaka
 %\addcontentsline{toc}{chapter}{{\numberline {}\popoznime}}
@@ -161,6 +155,22 @@ tekst tekst.
     % nuzna komanda za odredjivanje ukupnog broja str.(rimskih i arapskih)
 \pagenumbering{arabic} % mjenjam brojke stranice: ali od 1
 
+%
+\begin{sazetak}
+\noindent Kratki sa\v{z}etak rada na hrvatskom jeziku: najvi\v{s}e jedna stranica
+\ldots Tekst tekst tekst tekst tekst tekst.
+\end{sazetak}
+
+%
+\begin{abstract}
+\noindent Short summary of the thesis in one foreign language (english or
+german or french): up to one page \ldots Tekst tekst tekst tekst
+tekst tekst.
+\end{abstract}
+
+
+%-- ovdje pocinje pravi tekst: najelegantnije jest ubaciti ga kao posebne .tex
+%datoteke - jednu za cijeli tekst ili po jednu za svako poglavlje ili ...
 \clearpage
 \input uvod.tex
 \addtocounter{brojslika}{\arabic{figure}}
@@ -171,6 +181,7 @@ tekst tekst.
 %\addtocounter{brojtablica}{\arabic{table}}
 % ... i tako dalje za ostala poglavlja
 
+
 \input zakljuc.tex
 \addtocounter{brojslika}{\arabic{figure}}
 \addtocounter{brojtablica}{\arabic{table}}
@@ -179,7 +190,8 @@ tekst tekst.
 \chapter{Moj prvi dodatak}
 \addtocounter{brojslika}{\arabic{figure}}
 \addtocounter{brojtablica}{\arabic{table}}
-Zapravo nemam ništa!
+Tu dolazi prvi prilog odnosno dodatak tekstu (slike, podaci, kod, detaljni
+opisi, tablice, \ldots
 \newpage 
 Pa ni na ovoj stranici!
 \section{Malo poglavlje malog dodatka}

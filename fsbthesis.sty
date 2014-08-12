@@ -19,8 +19,8 @@
 % fsb_logo.pdf, suz_grb.pdf, glavni.tex, uvod.tex, popozn.tex, zakljuc.tex,
 % xampl.bib, glavni.ps, glavni.pdf, readme.txt
 
-\newcommand\FSBFileInfo{2009/11/28, v.2.3}
-\typeout{-> FSB thesis style, \FSBFileInfo, brought to you by Wrdo}
+\newcommand\FSBFileInfo{2014/03/14, v.2.5}
+\typeout{-> FSB thesis style, \FSBFileInfo, brought to you by wds}
 %
 \ProvidesPackage{fsbthesis}[\FSBFileInfo]
 \NeedsTeXFormat{LaTeX2e}
@@ -264,7 +264,7 @@ vcentering
 	  \textrm{\begin{minipage}[b]{7cm}
 		  		Mentor:\newline
 		  		\large{\FSBmentor}
-			\end{minipage}} \hfill \textrm{\large \FSBautor}
+			\end{minipage}} \hfill \textrm{\large{\FSBautor}}
       \vfill
       \textsc{Zagreb, \FSBgodina}
     \end{center}
@@ -498,10 +498,10 @@ vcentering
 	   	  \ifthenelse{\equal{\FSBsdizajn}{draft}}{--- \verzija --- \\}{}
       \vspace{3cm}
 	  \textrm{\begin{minipage}[b]{7cm}
-		  		Voditelj rada:\newline
+		  		Mentor:\newline % u slučaju više mentora - treba popraviti u 'Mentori'
 		  		\large{\FSBmentor}
 			\end{minipage}} \hfill \textrm{\begin{minipage}[b]{7cm}
-				\begin{flushright}\mbox{ }\\%
+				\begin{flushright} \hfill Student:\newline%
 					\large{\FSBautor}\end{flushright}
 			\end{minipage}}
       \vfill
@@ -587,12 +587,12 @@ vcentering
         \vspace{0.7cm}
       \end{center}\par
 	     }%
-	  {\ifthenelse{\equal{\FSBthesisname}{zavr\v sni rad}\or\equal{\FSBthesisname}{diplomski rad}}{%
-	  \relax\par\vfil\null}%
+	  %{\ifthenelse{\equal{\FSBthesisname}{zavr\v sni rad}\or\equal{\FSBthesisname}{diplomski rad}}{%
+	  %\relax\par\vfil\null}%
         {\bigskip
 		 \begin{flushleft}\textbf{Klju\v{c}ne rije\v{c}i:} \FSBkljucnerijeci  \end{flushleft}
          \par\vfil\null}
-		 }
+		 %}
 
 \renewenvironment{abstract}{%
       \newpage
