@@ -1,5 +1,5 @@
 \documentclass[a4paper,12pt]{report}
-\usepackage[cp1250]{inputenc} %s ovim mogu pisati hrv znakove direktno!
+\usepackage[utf8]{inputenc} %s ovim mogu pisati hrv znakove direktno na linux i win. platformama (ali samo u utf-8 encodingu)
 \usepackage{amsmath}
 \usepackage[croatian]{babel}
 \usepackage{xspace}
@@ -86,11 +86,7 @@
 %
 \pagenumbering{roman} % na pocetku rada stranice brojim rimski od (i)
 %
-\ifpdf %ako radim pdf netrebaju mi korice	
-	\relax
-\else
 \fsbkorice
-\fi
 %
 \fsbprvilist
 %
@@ -102,7 +98,7 @@
 \end{zahvala}
 
 \begin{izjava}
-	Izjavljujem da sam ovaj rad radio samostalno koriste\' ci ste\v cena
+	Izjavljujem da sam ovaj rad radio samostalno koristeÄ‡i steÄena
 	znanja tijekom studija i navedenu literaturu.
 \end{izjava}
 
@@ -195,7 +191,7 @@ opisi, tablice, \ldots
 \newpage 
 Pa ni na ovoj stranici!
 \section{Malo poglavlje malog dodatka}
-\subsection{i još manje podpoglavlje}
+\subsection{i joÅ¡ manje podpoglavlje}
 Ovo poglavlje poslu\v{z}it \'{c}e za uvod u problem koji se rje\v{s}ava u ovom
 radu, te se postavlja odgovaraju\'{c}a hipoteza za doktorsku
 disertaciju.
@@ -205,7 +201,7 @@ Tekst tekst tekst tekst tekst tekst primjer reference
 \cite{mastersthesis-minimal}, i jo\v{s} jedan \cite{inbook-full}.
 Tekst tekst tekst tekst tekst tekst 
 
-Malo æu se pozvati (\eqref{eq:ls-a1}) kao u šğèæŠĞÈÆ na 
+Malo Ä‡u se pozvati (\eqref{eq:ls-a1}) kao u Å¡Ä‘ÄÄ‡Å¾Å ÄÄŒÄ†Å½ na 
 \begin{equation}\label{eq:ls-a1}
 	C_l(y)=\frac{2\Gamma(y)}{\Vinf\;c(y)}\:,
 \end{equation}
@@ -227,7 +223,7 @@ Slijedi prvi primjer slike: FSB.(pogl.sliku~\ref{figa1})
 
 \clearpage
 Slijedi mali primjer slike: SUZ.(pogledaj sliku~\ref{figa2})
-\nomenclature[Ks]{$SUZ$}{Sveuèilište u Zagrebu}%
+\nomenclature[Ks]{$SUZ$}{SveuÄiliÅ¡te u Zagrebu}%
 %prvim slovom unutar uglate zagrade 'K' definiram da li je kratica ili indeks ili
 %akcent, a drugim slovom 's' mogu regulirati poredak pojavljivanja u popisu
 %oznaka (po abecedi, naravno)
@@ -258,7 +254,7 @@ Pored slike dan je i primjer tablice (\ref{tablicaa}).
 \chapter{i drugi \dots}
 \addtocounter{brojslika}{\arabic{figure}}
 \addtocounter{brojtablica}{\arabic{table}}
-\dots Opet ništa osim ove slike:~\ref{dodatna}
+\dots Opet niÅ¡ta osim ove slike:~\ref{dodatna}
 \begin{figure}
   \centering
   \includegraphics[height=1.2cm]{fsb_logo}
@@ -266,7 +262,7 @@ Pored slike dan je i primjer tablice (\ref{tablicaa}).
   \label{dodatna}
 \end{figure}
 \newpage
-\section{Samo prašim po testu}
+\section{Samo praÅ¡im po testu}
 Ovo poglavlje poslu\v{z}it \'{c}e za uvod u problem koji se rje\v{s}ava u ovom
 radu, te se postavlja odgovaraju\'{c}a hipoteza za doktorsku
 disertaciju.
@@ -286,4 +282,5 @@ disertaciju.
 \end{document}               % End of document.
 
 % makeindex glavni.nlo -s nomencl.ist -o glavni.nls 
+
 
