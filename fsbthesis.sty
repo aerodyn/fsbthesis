@@ -1,5 +1,5 @@
 % fsbthesis style:
-% LaTeX paket za zavrsne, diplomske, magistarske radove i 
+% LaTeX paket za zavrsne, diplomske radove (kao i master thesis) i 
 % doktorske disertacije na Fakultetu strojarstva i brodogradnje, 
 % Sveucilista u Zagrebu
 % LaTeX package for bachelor, master and doctoral thesis at the Faculty of
@@ -44,7 +44,7 @@
              linkcolor=blue,
              filecolor=red,
              citecolor=blue,
-			 pdftitle={Naslov doktorske disertacije/magistarskog/diplomskog/zavrsnog rada},
+			 pdftitle={Naslov doktorske disertacije/diplomskog/zavrsnog rada},
 			 pdfsubject={FSB thesis style - screen version},
 			 pdfauthor={Milan Vrdoljak},
              pdfstartview=FitV,
@@ -96,7 +96,6 @@
 \DeclareOption{zavrsni}{\renewcommand\FSBthesisname{zavr\v sni rad}}
 \DeclareOption{diplomski}{\renewcommand\FSBthesisname{diplomski rad}}
 \DeclareOption{master}{\renewcommand\FSBthesisname{master's thesis}}
-\DeclareOption{magistarski}{\renewcommand\FSBthesisname{magistarski rad}}
 \DeclareOption{doktorat}{\renewcommand\FSBthesisname{doktorska disertacija}}
 \DeclareOption{klasik}{\renewcommand\FSBdizajn{klasik}}
 \DeclareOption{alter}{\renewcommand\FSBdizajn{alter}}
@@ -332,12 +331,6 @@ vcentering
      \hfill\emph{Povjerenstvo:} & \FSBbibpovjerenstvo \\
      \hfill\emph{Institucija u kojoj je rad pohranjen:} & \FSBbibinstpoh
     \end{tabular}
-	
-    \ifthenelse{\equal{\FSBthesisname}{magistarski rad}}{%
-        \pagebreak
-        \thispagestyle{empty}
-        \vspace{1cm}
-        \emph{Ovdje umetni zadatak magistarskog rada!}}{}
     }
 \else
 \newcommand{\fsbbiblist}{%
@@ -367,12 +360,6 @@ vcentering
      \hfill\emph{Povjerenstvo:} & \FSBbibpovjerenstvo \\
      \hfill\emph{Institucija u kojoj je rad pohranjen:} & \FSBbibinstpoh
     \end{tabular}
-	
-    \ifthenelse{\equal{\FSBthesisname}{magistarski rad}}{%
-        \pagebreak
-        \thispagestyle{empty}
-        \vspace{1cm}
-        \emph{Ovdje umetni zadatak magistarskog rada!}}{}
     }
 \fi
 

@@ -1,23 +1,21 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage[utf8]{inputenc} %s ovim mogu pisati hrv znakove direktno na linux i win. platformama (ali samo u utf-8 encodingu)
 \usepackage{amsmath}
-\usepackage[english,croatian]{babel}
-%\usepackage[croatian]{babel}
+%\usepackage[english,croatian]{babel}
+\usepackage[croatian]{babel}
 \usepackage{xspace}
 \usepackage{url}
 \usepackage{hangcaption}
 \usepackage[croatian,refpage]{nomencl}
 \makenomenclature
-\usepackage[master,avant]{fsbthesis}
-%\usepackage[diplomski,avant]{fsbthesis}
+%\usepackage[master,avant]{fsbthesis}
+\usepackage[zavrsni,avant]{fsbthesis}
     % ili npr. \usepackage[avant,draft]{fsbthesis} %za doktorat - draft
 	%   ispisuje broj verzije teksta (promijeni naredbu \ver) i datum
     % ili npr. \usepackage[zavrsni,avant]{fsbthesis} %za zavrsni rad
     % ili npr. \usepackage[diplomski,avant]{fsbthesis} %za diplomski rad
 	% ili npr. \usepackage[diplomski,avant,draft]{fsbthesis} % za diplomski rad uz draft opciju - dodaje oznake datuma/ver.
-    % ili npr. \usepackage[magistarski,avant]{fsbthesis} %za mag.rad
     % ili npr. \usepackage[klasik]{fsbthesis} %za klasican izgled doktorata
-    % ili npr. \usepackage[magistarski,klasik]{fsbthesis} %za klas.mag.rad
 	% ili npr. \usepackage[master,avant]{fsbthesis} za dipl.rad na engl. ondnosno master's thesis
 	% ... za opis svih opicija pogledaj fsbthesis.sty (nazalost nije osvjezeno zadnjim promjenama)
 	% za vizualni izgled rada na raspolaganju su tri opcije: avant, alter i klasik
@@ -31,8 +29,8 @@
 %-- sljedece elemente je potrebno prilagoditi vasem radu:
 \title{NASLOV DIPLOMSKOG RADA}  %-- promijeniti naziv rada
 \author{ime prezime}      %-- promijeniti autora rada
-\date{Zagreb, May 2003}      % -- promijeniti datum: mjesec i godina - EN (za master opciju)
-%\date{Zagreb, svibanj 2003.}      % -- promijeniti datum: mjesec i godina - HR
+%\date{Zagreb, May 2003}      % -- promijeniti datum: mjesec i godina - EN (za master opciju)
+\date{Zagreb, svibanj 2003.}      % -- promijeniti datum: mjesec i godina - HR
 
 \makeatletter
 \renewcommand{\FSBautor}{Moje ime i prezime} %-- promijeniti ime autora
@@ -88,11 +86,11 @@
 %-- nije potrebno mijenjati
 \begin{izjava}
     %-- dio izjave na EN (suvišan za dipl.rad na HR)
-    I hereby declare that I have made this thesis independently using the
-	knowledge acquired during my studies and the cited references.
-	
-	\bigskip
-	
+    % I hereby declare that I have made this thesis independently using the
+	% knowledge acquired during my studies and the cited references.
+	% 
+	% \bigskip
+	% 
     %-- dio izjave na HR
 	Izjavljujem da sam ovaj rad radio samostalno koristeći znanja stečena
 	tijekom studija i navedenu literaturu.
@@ -160,104 +158,104 @@
 
 %-- kada je tekst na engleskom potrebno je dodati prošireni sažetak na hrvatskom:
 %   (za HR diplomski rad ovo je suvisno)
-\begin{prosirenisazetak}
-Za rad pisan na engleskom jeziku potrebno je napisati ``Prošireni sažetak'' koji
-treba sadržavati više najbitnijih detalja i zaključaka diplomskog rada. Tekst
-nije ograničen, ali poželjno je da ima nekoliko stranica. 
-
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
- 
-\section{Tekst}
-U ovom proširenom sažetku moguće je strukturirati tekst u poglavlja i
-podpoglavlja. Pri tome, ako je zahtjev da poglavlja budu numerirana onda će
-broj poglavlja imati prefiks ``0''. Tako će se razlikovati od glavnog dijela teksta. 
-Ova poglavlja i podpoglavlja pojavit će se i u ``Sadržaju'' odnosno u
-``Contents''.
-
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
- 
-
-\subsection{Drugi tekst}
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
- 
-
-\section*{Tekst}
-Ukoliko numeracija poglavlja i podpoglavlja nije od interesa dovoljno ih je u
-definiciji označiti sa ``*'', odnosno komanda za poglavlje bi bila
-\verb|\section*{Tekst}|. Slično se modificira i naredba \verb|\subsection*|,
-itd. Ova poglavlja i podpoglavlja neće se pojavit u ``Sadržaju'' odnosno u
-``Contents''.
-
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
- 
-
-\subsection*{Drugi tekst}
-I ``Proširenom sažetku'' moguće je navesti (odnosno ponoviti) i najbitnije slike, slike s
-najvažnijim rezultatima i sl. (kao npr. Sliku~\ref{fig:ps.1}).
-Slike u ``Proširenom sažetku'' bit će numerirane s prefiksom ``0'' i pojavit
-će se u ``List of Figures''. Na isti način uvode se i tablice.
-\begin{figure}
-  \centering
-  \includegraphics[height=3.2cm]{unizg_sivi_t4s}\\
-  \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
-  \label{fig:ps.1}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[height=3.2cm]{unizg_plavi_t2}\\
-  \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=3.2cm]{fsb_logo_n}\\
-  \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[height=2.6cm]{fsb_logo_v}\\
-  \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
-\end{figure}
-
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-Tekst tekst tekst tekst tekst tekst.
-
-U ``Proširenom sažetku'' također je moguće unijeti najbitnije jednadžbe iz
-rada poput~\eqref{eq:ps.1}
-\begin{equation}\label{eq:ps.1}
-	C_l(y)=\frac{2\Gamma(y)}{\Vinf\;c(y)}\:.
-\end{equation}
-Ukoliko numeracija jednadžbi nije od interesa ista se može ispustiti
-\[
-\Delta C_p=\frac{2}{\Vinf}\cdot\gamma\:.
-\]
-
-
-Tekst tekst tekst teks tekst tekst.
-Tekst tekst tekst teks tekst tekst.
-Tekst tekst tekst teks tekst tekst.
-Tekst tekst tekst teks tekst tekst.
-\end{prosirenisazetak}
+% \begin{prosirenisazetak}
+% Za rad pisan na engleskom jeziku potrebno je napisati ``Prošireni sažetak'' koji
+% treba sadržavati više najbitnijih detalja i zaključaka diplomskog rada. Tekst
+% nije ograničen, ali poželjno je da ima nekoliko stranica. 
+% 
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+%  
+% \section{Tekst}
+% U ovom proširenom sažetku moguće je strukturirati tekst u poglavlja i
+% podpoglavlja. Pri tome, ako je zahtjev da poglavlja budu numerirana onda će
+% broj poglavlja imati prefiks ``0''. Tako će se razlikovati od glavnog dijela teksta. 
+% Ova poglavlja i podpoglavlja pojavit će se i u ``Sadržaju'' odnosno u
+% ``Contents''.
+% 
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+%  
+% 
+% \subsection{Drugi tekst}
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+%  
+% 
+% \section*{Tekst}
+% Ukoliko numeracija poglavlja i podpoglavlja nije od interesa dovoljno ih je u
+% definiciji označiti sa ``*'', odnosno komanda za poglavlje bi bila
+% \verb|\section*{Tekst}|. Slično se modificira i naredba \verb|\subsection*|,
+% itd. Ova poglavlja i podpoglavlja neće se pojavit u ``Sadržaju'' odnosno u
+% ``Contents''.
+% 
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+%  
+% 
+% \subsection*{Drugi tekst}
+% I ``Proširenom sažetku'' moguće je navesti (odnosno ponoviti) i najbitnije slike, slike s
+% najvažnijim rezultatima i sl. (kao npr. Sliku~\ref{fig:ps.1}).
+% Slike u ``Proširenom sažetku'' bit će numerirane s prefiksom ``0'' i pojavit
+% će se u ``List of Figures''. Na isti način uvode se i tablice.
+% \begin{figure}
+%   \centering
+%   \includegraphics[height=3.2cm]{unizg_sivi_t4s}\\
+%   \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
+%   \emph{vise\'{c}e} zaglavlje -- hangcaption}
+%   \label{fig:ps.1}
+% \end{figure}
+% 
+% \begin{figure}
+%   \centering
+%   \includegraphics[height=3.2cm]{unizg_plavi_t2}\\
+%   \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
+%   \emph{vise\'{c}e} zaglavlje -- hangcaption}
+% \end{figure}
+% 
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=3.2cm]{fsb_logo_n}\\
+%   \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
+%   \emph{vise\'{c}e} zaglavlje -- hangcaption}
+% \end{figure}
+% 
+% \begin{figure}
+%   \centering
+%   \includegraphics[height=2.6cm]{fsb_logo_v}\\
+%   \hangcaption{Primjer slike u ``Proširenom sažetku''; kod ove slike primjenjeno je
+%   \emph{vise\'{c}e} zaglavlje -- hangcaption}
+% \end{figure}
+% 
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% Tekst tekst tekst tekst tekst tekst.
+% 
+% U ``Proširenom sažetku'' također je moguće unijeti najbitnije jednadžbe iz
+% rada poput~\eqref{eq:ps.1}
+% \begin{equation}\label{eq:ps.1}
+% 	C_l(y)=\frac{2\Gamma(y)}{\Vinf\;c(y)}\:.
+% \end{equation}
+% Ukoliko numeracija jednadžbi nije od interesa ista se može ispustiti
+% \[
+% \Delta C_p=\frac{2}{\Vinf}\cdot\gamma\:.
+% \]
+% 
+% 
+% Tekst tekst tekst teks tekst tekst.
+% Tekst tekst tekst teks tekst tekst.
+% Tekst tekst tekst teks tekst tekst.
+% Tekst tekst tekst teks tekst tekst.
+% \end{prosirenisazetak}
 
 
 %-- ovdje pocinje pravi tekst: najelegantnije jest ubaciti ga kao posebne .tex
