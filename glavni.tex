@@ -1,0 +1,277 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[cp1250]{inputenc} %s ovim mogu pisati hrv znakove direktno!
+\usepackage{amsmath}
+\usepackage[croatian]{babel}
+\usepackage{xspace}
+\usepackage{url}
+\usepackage{hangcaption}
+\usepackage[croatian,refpage]{nomencl}
+\makenomenclature
+\usepackage[diplomski,avant]{fsbthesis}
+    % ili npr. \usepackage[avant,draft]{fsbthesis} %za doktorat - draft
+	%   ispisuje broj verzije teksta (promijeni naredbu \ver) i datum
+    % ili npr. \usepackage[zavrsni,avant]{fsbthesis} %za zavrsni rad
+    % ili npr. \usepackage[diplomski,avant]{fsbthesis} %za diplomski rad
+    % ili npr. \usepackage[magistarski,avant]{fsbthesis} %za mag.rad
+    % ili npr. \usepackage[klasik]{fsbthesis} %za klasican izgled doktorata
+    % ili npr. \usepackage[magistarski,klasik]{fsbthesis} %za klas.mag.rad
+	% ... za opis svih opicija pogledaj fsbthesis.sty
+%\usepackage{t1enc}
+
+\vfuzz=2.7pt % Don't bother to report overfull boxes < 2.7pt
+%\graphicspath{{slike/}} % dodaj poseban direktoriji za slike (vrlo prakticno)
+
+\title{NASLOV DIPLOMSKOG RADA}  %Declares the document's title.
+\author{ime prezime}      % Declares the author's name.
+\date{Zagreb, svibanj 2003.}      % Deleting this command produces today's date.
+
+\makeatletter
+\renewcommand{\FSBautor}{Moje ime i prezime}
+\renewcommand{\FSBmentor}{prof.~dr.~sc.~ime prezime} %ili
+%	\begin{minipage}[t]{7cm}
+%		dr.~sc.~ime prezime,\\
+%		prof.~u mirovini
+%	\end{minipage}}
+\renewcommand{\FSBbibmentor}{
+		dr.~sc.~ime prezime,
+		prof. u mirovini}
+\renewcommand{\FSBgodina}{2003.}
+\renewcommand{\FSBbibudk}{xxx.xx}
+\renewcommand{\FSBkljucnerijeci}{popis klju\v{c}nih rije\v{c}i: maksimalno do deset \ldots}
+\renewcommand{\FSBkeywords}{list of the keywords: up to ten words}
+\renewcommand{\FSBbibznpolje}{zrakoplovstvo, raketna i svemirska tehnika}
+\renewcommand{\FSBbibdatumobr}{1. travnja 2005.}
+\renewcommand{\FSBbibpovjerenstvo}{prvi \v{c}lan povjerenstva, \newline
+                                   drugi \v{c}lan povjerenstva, \newline
+                                   tre\'{c}i \v{c}lan povjerenstva, \newline
+                                   \v{c}etvrti \v{c}lan povjerenstva, \newline
+                                   peti \v{c}lan povjerenstva }
+\renewcommand{\FSBpdfbrojstrana}{111}
+\renewcommand{\FSBpdfbrojslika}{111}
+\renewcommand{\FSBpdfbrojtablica}{111}
+\renewcommand{\FSBpdfbrojrefs}{111}
+
+\renewcommand{\ver}{\mbox{ver.2-01}}
+
+\renewcommand{\thestrana}{11}
+
+
+% komande za popis oznaka u nomenklaturnom stilu 
+\newcommand{\dottfill}{%
+  \leavevmode
+  \cleaders \hb@xt@ .8em{\hss.\hss}\hfill
+  \kern\z@}
+\ifpdf
+	\renewcommand{\pagedeclaration}[1]{\dottfill \hyperpage{#1}}%
+\else
+\renewcommand{\pagedeclaration}[1]{\dottfill \nobreakspace#1}%
+\fi
+\renewcommand{\nomname}{Popis oznaka}
+\setlength{\nomitemsep}{-\parsep}
+\addtolength{\nomitemsep}{0.2pt}
+\renewcommand{\nomgroup}[1]{%
+	\ifthenelse{\equal{#1}{K}}{\bigskip\par\item[\textbf{\large Kratice}]}{%
+	\ifthenelse{\equal{#1}{I}}{\bigskip\par\item[\textbf{\large	Indeksi}]}{%
+	\ifthenelse{\equal{#1}{T}}{\bigskip\par\item[\textbf{\large	Akcenti}]}{}}} }
+%\newcommand{\nomunit}[1]{%
+%	\renewcommand{\nomentryend}{\hspace*{\fill}[#1]}
+\makeatother
+
+% osobne definicije
+\def\AR{\hbox{\textit{A}\hskip-.38em \rm R}} % aspect ratio sign
+\def\Vinf{\hbox{$V_{\infty}$}} %brzina strujanja
+
+
+\begin{document}
+%
+\pagenumbering{roman} % na pocetku rada stranice brojim rimski od (i)
+%
+\ifpdf %ako radim pdf netrebaju mi korice	
+	\relax
+\else
+\fsbkorice
+\fi
+%
+\fsbprvilist
+%
+%\setcounter{brojstrana}{11}
+\fsbbiblist
+%
+\begin{zahvala}
+	\emph{To Donald E. Knuth \dots}
+\end{zahvala}
+
+\begin{predgovor}
+Ovdje \'{c}e se opisati \v{s}to me i za\v{s}to navelo na ovaj rad. Mogu\'{c}e je i
+ovdje staviti zahvale.
+
+Tekst tekst tekst tekst tekst tekst.
+\end{predgovor}
+%
+%-- sadrzaj:
+\clearpage
+\ifpdf
+	\phantomsection
+\fi
+\addcontentsline{toc}{chapter}{{\numberline{}\contentsname}}
+\tableofcontents
+
+%
+\begin{sazetak}
+\noindent Kratki sa\v{z}etak rada na hrvatskom jeziku: najvi\v{s}e jedna stranica
+\ldots Tekst tekst tekst tekst tekst tekst.
+\end{sazetak}
+
+%
+\begin{abstract}
+\noindent Short summary of the thesis in one foreign language (english or
+german or french): up to one page \ldots Tekst tekst tekst tekst
+tekst tekst.
+\end{abstract}
+
+%
+%%-- popis slika: ukoliko ih ima
+\clearpage
+\ifpdf
+	\phantomsection
+\fi
+\addcontentsline{toc}{chapter}{{\numberline{}\listfigurename}}
+\listoffigures
+%
+%-- popis tablica: ukoliko ih ima
+%\clearpage
+%\addcontentsline{toc}{chapter}{{\numberline{}\listtablename}}
+%\listoftables
+
+%-- ako se koristi klasicni popis oznaka
+%\addcontentsline{toc}{chapter}{{\numberline {}\popoznime}}
+%	\markboth{\MakeUppercase\popoznime}{}
+%\input popozn.tex
+
+\clearpage
+\ifpdf
+	\phantomsection
+\fi
+\addcontentsline{toc}{chapter}{{\numberline {}\popoznime}}
+\markboth{\MakeUppercase\nomname}{\MakeUppercase\nomname}
+\printnomenclature
+
+\clearpage
+\addtocounter{brojstrana}{\arabic{page}}\addtocounter{brojstrana}{-1}
+    % nuzna komanda za odredjivanje ukupnog broja str.(rimskih i arapskih)
+\pagenumbering{arabic} % mjenjam brojke stranice: ali od 1
+
+\clearpage
+\input uvod.tex
+\addtocounter{brojslika}{\arabic{figure}}
+\addtocounter{brojtablica}{\arabic{table}}
+
+%\input teorija.tex
+%\addtocounter{brojslika}{\arabic{figure}}
+%\addtocounter{brojtablica}{\arabic{table}}
+% ... i tako dalje za ostala poglavlja
+
+\input zakljuc.tex
+\addtocounter{brojslika}{\arabic{figure}}
+\addtocounter{brojtablica}{\arabic{table}}
+
+\appendix
+\chapter{Moj prvi dodatak}
+\addtocounter{brojslika}{\arabic{figure}}
+\addtocounter{brojtablica}{\arabic{table}}
+Zapravo nemam ništa!
+\newpage 
+Pa ni na ovoj stranici!
+\section{Malo poglavlje malog dodatka}
+\subsection{i još manje podpoglavlje}
+Ovo poglavlje poslu\v{z}it \'{c}e za uvod u problem koji se rje\v{s}ava u ovom
+radu, te se postavlja odgovaraju\'{c}a hipoteza za doktorsku
+disertaciju.
+
+\section{Primjer potpoglavlja}
+Tekst tekst tekst tekst tekst tekst primjer reference
+\cite{mastersthesis-minimal}, i jo\v{s} jedan \cite{inbook-full}.
+Tekst tekst tekst tekst tekst tekst 
+
+Malo æu se pozvati (\eqref{eq:ls-a1}) kao u šðèæžŠÐÈÆŽ na 
+\begin{equation}\label{eq:ls-a1}
+	C_l(y)=\frac{2\Gamma(y)}{\Vinf\;c(y)}\:,
+\end{equation}
+\nomenclature[acal]{$C_l$}{lokalni koeficijent uzgona}%\refeq}%
+\nomenclature[ecax]{$c$}{duljina tetive, [m]}%
+
+\subsection{Primjer potpotpoglavlja}
+
+Slijedi prvi primjer slike: FSB.(pogl.sliku~\ref{figa1})
+\nomenclature[Kf]{$FSB$}{Fakultet strojarstva i brodogradnje}%
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=1.2cm]{fsb_logo}\\
+  \hangcaption{Primjer slike: kod ove slike primjenjeno je
+  \emph{vise\'{c}e} zaglavlje -- hangcaption}
+  \label{figa1}
+\end{figure}
+
+\clearpage
+Slijedi mali primjer slike: SUZ.(pogledaj sliku~\ref{figa2})
+\nomenclature[Ks]{$SUZ$}{Sveuèilište u Zagrebu}%
+%prvim slovom unutar uglate zagrade 'K' definiram da li je kratica ili indeks ili
+%akcent, a drugim slovom 's' mogu regulirati poredak pojavljivanja u popisu
+%oznaka (po abecedi, naravno)
+
+\begin{figure}
+  \centering
+  \includegraphics[height=2.2cm]{suz_grb}\\
+  \hangcaption{Primjer slike: kod ove slike primjenjeno je
+  \emph{vise\'{c}e} zaglavlje -- hangcaption}
+  \label{figa2}
+\end{figure}
+
+
+Pored slike dan je i primjer tablice (\ref{tablicaa}).
+
+\begin{table}[!h]
+\hangcaption{Primjer tablice}
+\label{tablicaa}
+  \centering
+\begin{tabular}{|c c|} \hline
+    A & 1 \\
+    B & 2 \\
+    C & 3 \\
+    D & 4 \\ \hline
+\end{tabular}
+\end{table}
+
+\chapter{i drugi \dots}
+\addtocounter{brojslika}{\arabic{figure}}
+\addtocounter{brojtablica}{\arabic{table}}
+\dots Opet ništa osim ove slike:~\ref{dodatna}
+\begin{figure}
+  \centering
+  \includegraphics[height=1.2cm]{fsb_logo}
+  \hangcaption{Primjer slike u prilogu}
+  \label{dodatna}
+\end{figure}
+\newpage
+\section{Samo prašim po testu}
+Ovo poglavlje poslu\v{z}it \'{c}e za uvod u problem koji se rje\v{s}ava u ovom
+radu, te se postavlja odgovaraju\'{c}a hipoteza za doktorsku
+disertaciju.
+
+
+\nomenclature[Kf]{$dod$}{dummy dodatak}%
+
+% literatura:
+\newpage
+\ifpdf
+	\phantomsection
+\fi
+\bibliographystyle{unsrt} %abbrv
+\addcontentsline{toc}{chapter}{{\numberline{}\bibname}}
+\bibliography{xampl}
+
+\end{document}               % End of document.
+
+% makeindex glavni.nlo -s nomencl.ist -o glavni.nls 
+

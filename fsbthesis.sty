@@ -1,0 +1,841 @@
+% fsbthesis style:
+% LaTeX paket za zavrsne, diplomske, magistarske radove i 
+% doktorske disertacije na Fakultetu strojarstva i brodogradnje, 
+% Sveucilista u Zagrebu
+
+% fsbthesis.
+% Copyright 2003-2005. Milan Vrdoljak, milan.vrdoljak@fsb.hr
+
+% This program may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.2
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.2 or later is part of all distributions of LaTeX
+% version 1999/12/01 or later.
+%
+% This program consists of the files
+% fsbthesis.sty, fsbthesis.pdf, fsb_logo.eps, suz_grb.eps,
+% fsb_logo.pdf, suz_grb.pdf, glavni.tex, uvod.tex, popozn.tex, zakljuc.tex,
+% xampl.bib, glavni.ps, glavni.pdf, readme.txt
+
+\newcommand\FSBFileInfo{2009/11/28, v.2.3}
+\typeout{-> FSB thesis style, \FSBFileInfo, brought to you by Wrdo}
+%
+\ProvidesPackage{fsbthesis}[\FSBFileInfo]
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{subfigure}
+\RequirePackage{ifthen}
+\RequirePackage{longtable}
+\RequirePackage{fancyhdr}
+\RequirePackage{indentfirst}
+\RequirePackage{array}
+\RequirePackage{ifpdf}
+
+%\newif\ifpdf
+
+%\ifx\pdfoutput\undefined
+%\pdffalse % we are not running PDFLaTeX
+%\else
+%\pdfoutput=1 % we are running PDFLaTeX
+%\pdftrue
+%\fi
+
+\ifpdf
+ \RequirePackage[pdftex]{graphicx}
+ \pdfcompresslevel=9
+ \RequirePackage[pdftex,
+%			 draft
+             colorlinks=true,
+             linkcolor=blue,
+             filecolor=red,
+             citecolor=blue,
+			 pdftitle={Naslov doktorske disertacije/magistarskog/diplomskog/zavrsnog rada},
+			 pdfsubject={FSB thesis style - screen version},
+			 pdfauthor={Milan Vrdoljak},
+             pdfstartview=FitV,
+%             pdfpagemode=None,
+			 pdfpagemode=UseOutlines,
+			 linktocpage=true,
+%			 bookmarksopen=true
+			 bookmarksnumbered=true
+             ]{hyperref}
+% \let\WriteBookmarks\relax 
+	% otkomentiraj ovu liniju ako ne zelis da pdftex pise informacije za bookmarke
+ \DeclareGraphicsExtensions{.jpg,.pdf,.png,.mps}
+ \DeclareGraphicsRule{*}{mps}{*}{} 
+ 		% ovim graphics pretpostavlja ekstenziju .mps za svaku datoteku kojoj ne
+		% prepoznaje ekstenziju (.mps == izlazi mp)
+ \newcommand{\dbend}{\marginpar{\includegraphics[width=0.5cm]{dbend128}}} %opasan zavoj!
+ \newcommand{\ddbend}{\marginpar{\includegraphics[width=0.5cm]{dbend128} \includegraphics[width=0.5cm]{dbend128}}}  %vrlo opasan zavoj!
+\else
+ \RequirePackage[dvips]{graphicx}
+ \newcommand{\href}[2]{\normalfont #2}
+ \DeclareGraphicsExtensions{.eps,.mps}
+ \newcommand{\dbend}{\marginpar{\includegraphics{dbend128}}} %opasan zavoj!
+ \newcommand{\ddbend}{\marginpar{\includegraphics{dbend128} \includegraphics{dbend128}}}  %vrlo opasan zavoj!
+\fi
+
+\newcommand{\FSBthesisname}{moj doktorat} %dummy def
+\newcommand{\FSBautor}{mr.~sc.~ime prezime} %dummy def
+\newcommand{\FSBmentor}{moj mentor}
+\newcommand{\FSBgodina}{2003.}
+\newcommand{\FSBdizajn}{moj dizajn} %dummy def
+\newcommand{\FSBsdizajn}{moj dizajn} %dummy def
+\newcommand{\FSBkljucnerijeci}{moje klju\v{c}ne rije\v{c}i u sa\v{z}etku}
+\newcommand{\FSBkeywords}{my keywords}
+\newcommand{\FSBbibudk}{625.xxx}
+\newcommand{\FSBbibkljuc}{\FSBkljucnerijeci}
+\newcommand{\FSBbibmentor}{\FSBmentor}
+\newcommand{\FSBbibznpolje}{zrakoplovstvo}
+\newcommand{\FSBbibinst}{\fsb}
+\newcommand{\FSBbibdatumobr}{12.travnja 2003.}
+\newcommand{\FSBbibpovjerenstvo}{moje povjerenstvo}
+\newcommand{\FSBbibinstpoh}{\fsb, \newline Sveu\v{c}ili\v{s}te u Zagrebu}
+
+% dummy komande za pdf buduci da iz nekog razloga s pdftex-om LastPage ne radi!
+\newcommand{\FSBpdfbrojstrana}{xx}
+\newcommand{\FSBpdfbrojslika}{xx}
+\newcommand{\FSBpdfbrojtablica}{xx}
+\newcommand{\FSBpdfbrojrefs}{xx}
+
+\DeclareOption{zavrsni}{\renewcommand\FSBthesisname{zavr\v sni rad}}
+\DeclareOption{diplomski}{\renewcommand\FSBthesisname{diplomski rad}}
+\DeclareOption{magistarski}{\renewcommand\FSBthesisname{magistarski rad}}
+\DeclareOption{doktorat}{\renewcommand\FSBthesisname{doktorska disertacija}}
+\DeclareOption{klasik}{\renewcommand\FSBdizajn{klasik}}
+\DeclareOption{alter}{\renewcommand\FSBdizajn{alter}}
+\DeclareOption{avant}{\renewcommand\FSBdizajn{avant}}
+\DeclareOption{draft}{\renewcommand\FSBdizajn{avant}\renewcommand\FSBsdizajn{draft}}
+\DeclareOption{nalter}{\renewcommand\FSBdizajn{alter}\renewcommand\FSBsdizajn{nalter}}
+\DeclareOption*{\PackageWarrning{fsbthesis}{Zasada nepoznata opcija '\CurrentOption'}}
+\ExecuteOptions{doktorat,avant} %default opicije
+\ProcessOptions\relax
+
+%-- prepravke hrvatskog nazivlja
+\addto\captionscroatian{%
+  \def\prefacename{Predgovor}%
+  \def\refname{Literatura}%
+  \def\abstractname{Summary}%
+  \def\sazetakime{Sa\v{z}etak}%
+  \def\bibname{Literatura}%
+  \def\chaptername{Poglavlje}%
+  \def\appendixname{Dodatak}%
+  \def\contentsname{Sadr\v{z}aj}%
+  \def\listfigurename{Popis slika}%
+  \def\listtablename{Popis tablica}%
+  \def\indexname{Indeks}%
+  \def\figurename{Slika}%
+  \def\tablename{Tablica}%
+  \def\partname{Dio}%
+  \def\enclname{Prilozi}%
+  \def\ccname{Kopije}%
+  \def\headtoname{Prima}%
+  \def\pagename{Strana}%
+  \def\seename{Vidi}%
+  \def\alsoname{Vidi tako{\dj}er}%
+  \def\proofname{Dokaz}%
+  \def\zivotopisime{\v{Z}ivotopis}%
+  }%
+
+%-- korisne definicije
+\def\popoznime{Popis oznaka}
+\newcommand{\ver}{\mbox{ver.0-0}}
+\newcommand{\verzija}{\ver/\today}
+\newcommand\fsb{Fakultet strojarstva i brodogradnje}
+
+%-- korekcije dimenzija
+\usepackage[text={157mm,218mm}]{geometry}
+\geometry{
+paperwidth=210mm,
+paperheight=297mm,
+inner=26.5mm,
+outer=26.5mm, %,top=23.36mm
+top=40.5mm, %26mm+26pt+25pt
+vcentering
+}
+\addtolength{\headheight}{0.5cm}
+\newlength{\duljnaslpogl}
+\linespread{1.3} %razmak izme{\dj}u redova: 1.3 - 1+1/2razmak; 1.6 - 2razmak
+
+%-- korekcije izleda naslova, zaglavlja, ...
+\renewcommand \thechapter      {\@arabic\c@chapter.}
+\newcommand{\thechapterx}{\@arabic\c@chapter}
+\renewcommand{\thesection}{\thechapter\@arabic\c@section.}
+\renewcommand{\thesubsection}{\thesection\@arabic\c@subsection.}
+\renewcommand{\thesubsubsection}{\thesubsection\@arabic\c@subsubsection.}
+
+\renewcommand{\theequation}{\thechapter\@arabic\c@equation}
+\renewcommand{\thefigure}{\thechapter\@arabic\c@figure}
+\renewcommand{\thetable}{\thechapter\@arabic\c@table}
+\renewcommand{\thesubfigure}{ \alph{subfigure})}
+
+%-- brojaci
+\newcounter{brojslika}
+\newcommand \theslika{\arabic{brojslika}}
+\newcounter{brojtablica}
+\newcommand \thetablica{\arabic{brojtablica}}
+\newcounter{brojstrana}
+\setcounter{brojstrana}{-1} %moram skinuti u broju sljedecu stranicu.
+\newcommand \thestrana{\arabic{brojstrana}}
+
+%-- dizajn stranice
+\ifthenelse{\equal{\FSBdizajn}{klasik}}{%
+    \pagestyle{plain}}{}
+\ifthenelse{\equal{\FSBdizajn}{alter}}{%
+    \pagestyle{fancy}
+       \renewcommand{\chaptermark}[1]{%
+        \markboth{\chaptername
+        \ \thechapter \ #1}{}}
+       \fancyhead{} %clear all fields
+       %---
+       \fancyhead[R]{{\footnotesize {\slshape \textsf{\leftmark}}} \hfill
+       \rm \thepage}
+       %---
+       %\fancyhead[LE,RO]{\rm \thepage}
+       %\fancyhead[RE,LO]{\footnotesize {\slshape \textsf{\leftmark}}}
+       %---
+       \fancyfoot[C]{}
+       \renewcommand{\headrulewidth}{0pt}
+    }{}
+\ifthenelse{\equal{\FSBdizajn}{avant}}{%
+    \pagestyle{fancyplain}
+       \renewcommand{\chaptermark}[1]{%
+        \markboth{\chaptername
+        \ \thechapter \ #1}{}}
+	   \fancyhead{} %clear all fields
+       %--- twosided
+	   \fancyhead[RO]{\fancyplain{}{\footnotesize {\textsf{\leftmark}}\hspace*{.3cm}
+	   \textsf{\bfseries\thepage}\\\vspace*{-7pt}\hfill\rule{2cm}{.3pt}}}
+	   \fancyhead[LE]{\fancyplain{}{\footnotesize \textsf{\bfseries\thepage}\hspace*{.3cm}{\textsf{\leftmark}}
+	   \\\vspace*{-7pt}\rule{2cm}{.3pt}}}
+	   \ifthenelse{\equal{\FSBsdizajn}{draft}}{% %-- draft ne bi smio biti obostran?
+	     \fancyhead[RO]{\fancyplain{}{\footnotesize {\textsf{\leftmark}}\hspace*{.3cm}
+	     \textsf{\bfseries\thepage}\\\vspace*{-7pt}\hfill\rule{2cm}{.3pt}}}
+	     \fancyhead[LE]{\fancyplain{}{\footnotesize \textsf{\bfseries\thepage}\hspace*{.3cm}{\textsf{\leftmark}}
+	     \\\vspace*{-7pt}\rule{2cm}{.3pt}}}
+	     \fancyhead[LO,RE]{\fancyplain{}{\footnotesize \verzija}}%
+	   }{}
+	   \fancyfoot[C]{\fancyplain{\rule{2cm}{.3pt}\relax\\\footnotesize\textsf{\bfseries\thepage}}{}}
+       \renewcommand{\headrulewidth}{0pt}
+       %--- one sided
+%	   \fancyhead[R]{\fancyplain{}{\footnotesize \hfill{\textsf{\leftmark}}\hspace*{.3cm}
+%	   \textsf{\bfseries\thepage}\\\vspace*{-7pt}\hfill\rule{2cm}{.3pt}}}
+%	   \ifthenelse{\equal{\FSBsdizajn}{draft}}{%
+%	   \fancyhead[R]{\fancyplain{}{\footnotesize \verzija\hfill{\textsf{\leftmark}}\hspace*{.3cm}
+%	   \textsf{\bfseries\thepage}\\\vspace*{-7pt}\hfill\rule{2cm}{.3pt}}}}{}
+%	   \fancyfoot[C]{\fancyplain{\rule{2cm}{.3pt}\relax\\\footnotesize\textsf{\bfseries\thepage}}{}}
+%       \renewcommand{\headrulewidth}{0pt}
+    }{}
+
+%-- obavezni elementi
+\newcommand{\fsbkorice}{
+    \newpage
+    \thispagestyle{empty}
+    \setcounter{page}{0}
+    \begin{center}
+      \null
+      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \smallskip
+      \textsc{\large \fsb} \\
+      \vspace{4.0cm}
+      {\LARGE \textsc{\@title} \\}
+      \bigskip
+      \textsc{\large \FSBthesisname} \\
+      \vspace{3cm}
+      \hfill \textrm{\large \@author}
+      \vfill
+      \textsc{Zagreb, \FSBgodina}
+    \end{center}
+}
+\newcommand{\fsbprvilist}{
+    \pagebreak
+    \thispagestyle{empty}
+    \begin{center}
+      \null
+      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \smallskip
+      \textsc{\large \fsb} \\
+      \vspace{4cm}
+      {\LARGE \textsc{\@title} \\}
+      \bigskip
+      \textsc{\large \FSBthesisname} \\
+      \vspace{3cm}
+	  \textrm{\begin{minipage}[b]{7cm}
+		  		Mentor:\newline
+		  		\large{\FSBmentor}
+			\end{minipage}} \hfill \textrm{\large \FSBautor}
+      \vfill
+      \textsc{Zagreb, \FSBgodina}
+    \end{center}
+}
+\ifpdf
+\newcommand{\fsbbiblist}{%
+    \pagebreak
+    \linespread{1} %razmak izme{\dj}u redova: 1.3 - 1+1/2razmak; 1.6 - 2razmak
+    \thispagestyle{empty}
+    \vspace{1cm}
+    \begin{center}
+      \textbf{\large Podaci za bibliografsku karticu}
+    \end{center}
+    \vspace{2cm}
+
+    \hspace{-1.5cm}%
+	\noindent\begin{tabular}{p{0.48\textwidth} p{0.52\textwidth}}
+     \hfill\emph{UDK:} & \FSBbibudk \\
+     \hfill\emph{Klju\v{c}ne rije\v{c}i:} & \FSBbibkljuc \\
+     \hfill\emph{Znanstveno podru\v{c}je:} & tehni\v{c}ke znanosti\\
+     \hfill\emph{Znanstveno polje:} & \FSBbibznpolje \\
+     \hfill\emph{Institucija u kojoj je rad izra{\dj}en:} & \FSBbibinst \\
+     \hfill\emph{Mentor:} & \FSBbibmentor \\
+     \hfill\emph{Broj stranica:} & \FSBpdfbrojstrana \\ %\pageref{LastPage} % OPREZ! korigirati za stvarni broj
+	 \hfill\emph{Broj slika:} & \FSBpdfbrojslika \\ % OPREZ! korigirati za stvarni broj
+     \hfill\emph{Broj tablica:} & \FSBpdfbrojtablica \\ % OPREZ! korigirati za stvarni broj
+     \hfill\emph{Broj kori\v{s}tenih bibliografskih jedinica:} & \FSBpdfbrojrefs \\ % OPREZ! korigirati za stvarni broj
+     \hfill\emph{Datum obrane:} & \FSBbibdatumobr \\
+     \hfill\emph{Povjerenstvo:} & \FSBbibpovjerenstvo \\
+     \hfill\emph{Institucija u kojoj je rad pohranjen:} & \FSBbibinstpoh
+    \end{tabular}
+	
+    \ifthenelse{\equal{\FSBthesisname}{magistarski rad}}{%
+        \pagebreak
+        \thispagestyle{empty}
+        \vspace{1cm}
+        \emph{Ovdje umetni zadatak magistarskog rada!}}{}
+    }
+\else
+\newcommand{\fsbbiblist}{%
+    \pagebreak
+    \linespread{1} %razmak izme{\dj}u redova: 1.3 - 1+1/2razmak; 1.6 - 2razmak
+    \thispagestyle{empty}
+    \vspace{1cm}
+    \begin{center}
+      \textbf{\large Podaci za bibliografsku karticu}
+    \end{center}
+    \vspace{2cm}
+	
+ %    \noindent\begin{tabular}{p{7cm} p{7cm}}
+    \hspace{-1.5cm}%
+	\noindent\begin{tabular}{p{0.48\textwidth} p{0.52\textwidth}}
+     \hfill\emph{UDK:} & \FSBbibudk \\
+     \hfill\emph{Klju\v{c}ne rije\v{c}i:} & \FSBbibkljuc \\
+     \hfill\emph{Znanstveno podru\v{c}je:} & tehni\v{c}ke znanosti\\
+     \hfill\emph{Znanstveno polje:} & \FSBbibznpolje \\
+     \hfill\emph{Institucija u kojoj je rad izra{\dj}en:} & \FSBbibinst \\
+     \hfill\emph{Mentor:} & \FSBbibmentor \\
+     \hfill\emph{Broj stranica:} & \pageref{LastPageS} \\ %\pageref{LastPage}
+	 \hfill\emph{Broj slika:} & \pageref{LastPageF} \\
+     \hfill\emph{Broj tablica:} & \pageref{LastPageT} \\
+     \hfill\emph{Broj kori\v{s}tenih bibliografskih jedinica:} & \pageref{LastPageRef} \\
+     \hfill\emph{Datum obrane:} & \FSBbibdatumobr \\
+     \hfill\emph{Povjerenstvo:} & \FSBbibpovjerenstvo \\
+     \hfill\emph{Institucija u kojoj je rad pohranjen:} & \FSBbibinstpoh
+    \end{tabular}
+	
+    \ifthenelse{\equal{\FSBthesisname}{magistarski rad}}{%
+        \pagebreak
+        \thispagestyle{empty}
+        \vspace{1cm}
+        \emph{Ovdje umetni zadatak magistarskog rada!}}{}
+    }
+\fi
+
+\newcommand{\popozn}{
+   \chapter*{\popoznime
+        \@mkboth{%
+           \MakeUppercase\popoznime}{\MakeUppercase\popoznime}}%
+%   \addcontentsline{toc}{chapter}{{\numberline {}\popoznime}}
+   }
+
+\ifthenelse{\equal{\FSBdizajn}{avant}}{%
+    \renewcommand{\fsbkorice}{
+        \newpage
+        \thispagestyle{empty}
+        \setcounter{page}{0}
+        \begin{center}
+          \null
+      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \smallskip
+      \textsc{\large \fsb} \\
+          \vspace{4.7cm}
+          {\LARGE \bfseries\@title \\}
+          \bigskip
+          \textsc{\large \FSBthesisname} \\
+	   	  \ifthenelse{\equal{\FSBsdizajn}{draft}}{--- \verzija --- \\}{}
+          \vspace{3cm}
+		  \hfill\textrm{\large \@author}
+%          \textrm{\large{\FSBmentor}} \hfill \textrm{\large \@author}
+          \vfill
+          \textsc{Zagreb, \FSBgodina}\\
+        \end{center}}
+    \renewcommand{\fsbprvilist}{
+        \pagebreak
+        \thispagestyle{empty}
+        \begin{center}
+          \null
+          \begin{tabular}{m{2.5cm} | m{11cm}}
+			%\flushright
+			\includegraphics[width=2.5cm]{suz_grb}
+          		& %\hspace{.5cm}
+		    %\flushleft
+			\begin{minipage}{7cm}
+            %\vspace*{-1.2cm}
+		    %\flushleft
+			\includegraphics[width=2.5cm]{fsb_logo} \\%\vspace*{-1.2cm}
+			\vspace*{-1.0cm}%\vfill
+			\begin{flushleft}
+                     \textsf{Sveu\v{c}ili\v{s}te u Zagrebu}\\
+                     \vspace{-.1cm}\textsf{\fsb}
+            \end{flushleft}
+		  \end{minipage}
+          \end{tabular}\\
+          \vspace{4.0cm}
+          {\LARGE \bfseries\@title \\}
+          \bigskip
+          \textsc{\large \FSBthesisname} \\
+	   	  \ifthenelse{\equal{\FSBsdizajn}{draft}}{--- \verzija --- \\}{}
+          \vspace{3cm}
+		  \textrm{\begin{minipage}[b]{7cm}
+		  		Mentor:\newline
+		  		\large{\FSBmentor}
+			\end{minipage}} \hfill \textrm{\large \FSBautor}
+%          \textrm{\large{\FSBmentor}} \hfill \textrm{\large \@author}
+          \vfill
+          \textsc{Zagreb, \FSBgodina}
+        \end{center}}
+    } % zavrsetak promjena za alernativni dizajn
+    {} %u suprotnom nista
+
+\ifthenelse{\equal{\FSBdizajn}{alter}}{%
+    \renewcommand{\fsbkorice}{
+        \newpage
+        \thispagestyle{empty}
+        \setcounter{page}{0}
+        \begin{center}
+          \null
+      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \smallskip
+      \textsc{\large \fsb} \\
+          \vspace{4.7cm}
+%          \vspace{4.0cm}
+          {\LARGE \@title \\}
+          \bigskip
+          \textsc{\large \FSBthesisname} \\
+          \vspace{3cm}
+          \hfill \textrm{\large \@author}
+          \vfill
+          \textsc{Zagreb, \FSBgodina}
+        \end{center}}
+    \renewcommand{\fsbprvilist}{
+        \pagebreak
+        \thispagestyle{empty}
+        \begin{center}
+          \null
+          \begin{tabular}{m{3cm} m{7cm} m{3cm}}
+          \raggedleft
+          \includegraphics[width=2.5cm]{fsb_logo} & %\hspace{.5cm}
+               \begin{flushleft}
+                     \textsf{Sveu\v{c}ili\v{s}te u Zagrebu}\\
+                     \vspace{-.1cm}\textsf{\fsb}
+               \end{flushleft}
+          & %\hspace{.5cm}
+                \raggedright
+                \includegraphics[width=2.5cm]{suz_grb}
+          \end{tabular}\\
+          \vspace{4.0cm}
+          {\LARGE \@title \\}
+          \bigskip
+          \textsc{\large \FSBthesisname} \\
+          \vspace{3cm}
+		  \textrm{\begin{minipage}[b]{7cm}
+		  		Mentor:\newline
+		  		\large{\FSBmentor}
+			\end{minipage}} \hfill \textrm{\large \FSBautor}
+%          \textrm{\large{\FSBmentor}} \hfill \textrm{\large \@author}
+          \vfill
+          \textsc{Zagreb, \FSBgodina}
+        \end{center}}
+    } % zavrsetak promjena za alernativni dizajn
+    {} %u suprotnom nista
+
+%-- promjene za zavrsni rad
+\ifthenelse{\equal{\FSBthesisname}{zavr\v sni rad}\or\equal{\FSBthesisname}{diplomski rad}}{%
+\renewcommand{\fsbkorice}{
+    \newpage
+    \thispagestyle{empty}
+    \setcounter{page}{0}
+    \begin{center}
+      \null
+      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \smallskip
+      \textsc{\large \fsb} \\
+      \vspace{4.0cm}
+%      {\LARGE \textsc{\@title} \\}
+      {\Huge \textsc{\FSBthesisname} \\}
+      \bigskip
+%      \textsc{\large \FSBthesisname} \\
+	  \textsc{\large \mbox{ }} \\
+	   	  \ifthenelse{\equal{\FSBsdizajn}{draft}}{--- \verzija --- \\}{}
+      \vspace{3cm}
+      \hfill \textrm{\large \@author}
+      \vfill
+      \textsc{Zagreb, \FSBgodina}
+    \end{center}
+}
+\renewcommand{\fsbprvilist}{
+    \pagebreak
+    \thispagestyle{empty}
+    \begin{center}
+      \null
+      \textsc{\large Sveu\v{c}ili\v{s}te u Zagrebu}\\
+      \smallskip
+      \textsc{\large \fsb} \\
+      \vspace{4cm}
+%      {\LARGE \textsc{\@title} \\}
+      {\Huge \textsc{\FSBthesisname} \\}
+      \bigskip
+      \textsc{\large \@title \\}
+	   	  \ifthenelse{\equal{\FSBsdizajn}{draft}}{--- \verzija --- \\}{}
+      \vspace{3cm}
+	  \textrm{\begin{minipage}[b]{7cm}
+		  		Voditelj rada:\newline
+		  		\large{\FSBmentor}
+			\end{minipage}} \hfill \textrm{\begin{minipage}[b]{7cm}
+				\begin{flushright}\mbox{ }\\%
+					\large{\FSBautor}\end{flushright}
+			\end{minipage}}
+      \vfill
+      \textsc{Zagreb, \FSBgodina}
+    \end{center}
+	\newpage
+        \thispagestyle{empty}
+        \vspace*{8cm}
+		\begin{center}%
+			\emph{--- Ovdje umetni tekst zadataka za~\FSBthesisname! --- }
+		\end{center}
+}
+\renewcommand{\fsbbiblist}{\relax}
+    } % zavrsetak promjena za zavrsni rad
+    {} %u suprotnom nista
+
+
+
+%-- definicije okolina:
+\newenvironment{zahvala}{%
+    \newpage
+    \thispagestyle{empty}
+    \null\vfill
+	\begin{minipage}{8cm}%
+    }%
+    {%
+    \end{minipage}
+    \par
+    }%
+
+\newenvironment{izjava}{%
+    \newpage
+    \thispagestyle{empty}
+	\null\vspace{2cm}
+	\noindent\begin{minipage}{\textwidth}%{8cm}%
+		\textrm{\bfseries \large{Izjava}}\newline\par
+    }%
+    {%
+    \end{minipage}
+    \par\vspace{2.5cm} \noindent \@date \hfill \FSBautor
+    }
+
+\newenvironment{predgovor}{%
+    \newpage
+    \thispagestyle{empty}
+	\ifpdf
+		\phantomsection
+	\fi
+	\ifthenelse{\equal{\FSBdizajn}{avant}}{%
+		\vspace*{1\p@}%
+		\noindent\begin{tabular}{r|l}
+			\begin{minipage}[t]{1cm}
+				\relax\vspace{3cm}	
+			\end{minipage} &
+			\hspace*{0.5cm}\begin{minipage}[t]{10cm}
+				\huge \sffamily\bfseries \prefacename \par\nobreak
+			\end{minipage}
+		\end{tabular}
+    \addcontentsline{toc}{chapter}{{\numberline {}\prefacename}}
+    \interlinepenalty\@M
+    \vskip 80\p@
+	}{%
+	\textbf{\huge \prefacename}
+    \addcontentsline{toc}{chapter}{{\numberline {}\prefacename}}
+      \null\vfil
+	}%	  
+        }%
+		{\par\vspace{2.5cm} \noindent \@date \hfill \FSBautor}
+
+\newenvironment{sazetak}{%
+      \newpage
+      \thispagestyle{plain}
+	  \ifpdf
+	  	\phantomsection
+	  \fi
+      \addcontentsline{toc}{chapter}{{\numberline {}\sazetakime}}
+      \null\vfil
+      \begin{center}%
+	  \ifthenelse{\equal{\FSBdizajn}{avant}}{%
+        \textsf{\bfseries \huge{\sazetakime}}
+		}{%
+		\textbf{\huge{\sazetakime}}}
+        \vspace{0.7cm}
+      \end{center}\par
+	     }%
+	  {\ifthenelse{\equal{\FSBthesisname}{zavr\v sni rad}\or\equal{\FSBthesisname}{diplomski rad}}{%
+	  \relax\par\vfil\null}%
+        {\bigskip
+		 \begin{flushleft}\textbf{Klju\v{c}ne rije\v{c}i:} \FSBkljucnerijeci  \end{flushleft}
+         \par\vfil\null}
+		 }
+
+\renewenvironment{abstract}{%
+      \newpage
+      \thispagestyle{plain}
+	  \ifpdf
+	    \phantomsection
+      \fi
+      \addcontentsline{toc}{chapter}{{\numberline {}\abstractname}}
+      \null\vfil
+      \begin{center}%
+	  \ifthenelse{\equal{\FSBdizajn}{avant}}{%
+        \textsf{\bfseries \huge{\abstractname}} \\
+		}{%
+		\textbf{\huge{\abstractname}} \\}
+        \vspace{0.7cm}
+%        \begin{flushleft}\textbf{Keywords:} \FSBkeywords \end{flushleft}
+%        \smallskip
+      \end{center}\par
+	    }%
+        {\bigskip
+		 \begin{flushleft}\textbf{Keywords:} \FSBkeywords  \end{flushleft}
+         \par\vfil\null}
+
+\newenvironment{zivotopis}{%
+      \newpage
+      \thispagestyle{plain}
+	  \ifpdf
+	  	\phantomsection
+	  \fi
+      \addcontentsline{toc}{chapter}{{\numberline {}\zivotopisime}}
+      \null\vfil
+      \begin{center}%
+	  \ifthenelse{\equal{\FSBdizajn}{avant}}{%
+		\huge{\textsf{\bfseries \zivotopisime}}
+		}{%
+		\huge{\bfseries \zivotopisime}}
+        \vspace{0.7cm}
+      \end{center}}%
+     {\par\vfil\null}
+
+\newenvironment{shortbio}{%
+      \newpage
+      \thispagestyle{plain}
+	  \ifpdf
+	    \phantomsection
+	  \fi
+      \addcontentsline{toc}{chapter}{{\numberline {}Biography}}
+      \null\vfil
+      \begin{center}%
+	  \ifthenelse{\equal{\FSBdizajn}{avant}}{%
+		  \huge{\textsf{\bfseries Biography}}
+		  }{%
+          \huge{\bfseries Biography}}
+        \vspace{0.7cm}
+      \end{center}}%
+     {\par\vfil\null}
+
+\newenvironment{unapomene}{%
+     \usefont{OT1}{cmss}{m}{n}}%
+     {}
+
+%-- brojaci slika, tablica, refernci
+\newcounter{fig}
+\def\lastpagef@putlabelf{\addtocounter{fig}{-1}%
+   \immediate\write\@auxout{\string
+   \newlabel{LastPageF}{{}{\theslika}}}%
+   \addtocounter{fig}{1}}
+\AtEndDocument{%
+   \message{AED: lastpage-fig setting LastPageF}%
+   \clearpage\lastpagef@putlabelf}%
+
+\renewcommand{\p@subfigure}{\thefigure}
+
+\newcounter{tabl}
+\def\lastpaget@putlabelt{\addtocounter{tabl}{-1}%
+   \immediate\write\@auxout{\string
+   \newlabel{LastPageT}{{}{\thetablica}}}%
+   \addtocounter{tabl}{1}}
+\AtEndDocument{%
+   \message{AED: lastpage-tablice setting LastPageT}%
+   \clearpage\lastpaget@putlabelt}%
+
+\newcounter{refer}
+\def\lastpager@putlabelr{\addtocounter{refer}{-1}%
+   \immediate\write\@auxout{\string
+   \newlabel{LastPageRef}{{}{\arabic{enumiv}}}}%
+   \addtocounter{refer}{1}}
+\AtEndDocument{%
+   \message{AED: lastpage-literatura setting LastPageT}%
+   \clearpage\lastpager@putlabelr}%
+
+\newcounter{strn}
+\def\lastpages@putlabels{\addtocounter{strn}{-1}%
+   \immediate\write\@auxout{\string
+   \newlabel{LastPageS}{{}{\thestrana}}}%
+   \addtocounter{strn}{1}}
+\AtEndDocument{%
+   \addtocounter{brojstrana}{\arabic{page}}
+   \message{AED: lastpage-fig setting LastPageS}%
+   \clearpage\lastpages@putlabels}%
+
+%-- definicija izgleda poglavlja (prve stranice poglavlja):
+\ifthenelse{\equal{\FSBdizajn}{avant}}{%
+\renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                    \thispagestyle{plain}%
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                         \refstepcounter{chapter}%
+                         \typeout{\@chapapp\space\thechapter.}%
+                         \addcontentsline{toc}{chapter}%
+                                   {\protect\numberline{\thechapter}#1}%
+                    \else
+                      \addcontentsline{toc}{chapter}{#1}%
+                    \fi
+                    \chaptermark{#1}%
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
+                      \@topnewpage[\@makechapterhead{#2}]%
+                    \else
+                      \@makechapterhead{#2}%
+                      \@afterheading
+                    \fi}
+\def\@makechapterhead#1{%
+  \vspace*{1\p@}%
+  {%\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \noindent\raggedright
+		\begin{tabular}{r | l}
+			\begin{minipage}[t]{1cm}
+				\sffamily\Huge\bfseries\selectfont \thechapterx\vspace{3cm}
+			\end{minipage} &
+			\hspace*{0.5cm}\begin{minipage}[t]{10cm}
+				\Huge \sffamily\bfseries #1 \par\nobreak
+			\end{minipage}
+        %\vskip 20\p@
+		\end{tabular}
+    \fi
+    \interlinepenalty\@M
+%    \settowidth{\duljnaslpogl}{\Huge\bfseries #1} \hfill\rule{\duljnaslpogl}{1pt}
+%    \par\nobreak
+%    \hfill \Huge \bfseries #1\par\nobreak
+    \vskip 80\p@
+  }}
+\def\@schapter#1{\if@twocolumn
+                   \@topnewpage[\@makeschapterhead{#1}]%
+                 \else
+                   \@makeschapterhead{#1}%
+                   \@afterheading
+                 \fi}
+\def\@makeschapterhead#1{%
+  \vspace*{1\p@}%
+  {%\parindent \z@ \raggedright
+    \normalfont
+        \noindent\raggedright
+		\begin{tabular}{r|l}
+			\begin{minipage}[t]{0cm}
+				\relax\vspace{3cm} %\sffamily\fontsize{42}{44}\selectfont \thechapterx
+			\end{minipage} &
+			\hspace*{0.5cm}\begin{minipage}[t]{10cm}
+				\Huge \sffamily\bfseries #1 \par\nobreak
+			\end{minipage}
+        %\vskip 20\p@
+		\end{tabular}
+    \interlinepenalty\@M
+    \vskip 80\p@
+  }}
+  } % zavrsetak promjena za alernativni dizajn
+  {} %u suprotnom nista
+
+\renewcommand\appendix{\par
+  \setcounter{chapter}{0}%
+  \setcounter{section}{0}%
+  \gdef\@chapapp{\appendixname}%
+  \renewcommand{\thechapterx}{\@Alph\c@chapter}%
+  \renewcommand{\thechapter}{\@Alph\c@chapter.}%
+  \renewcommand{\theequation}{\thechapter\@arabic\c@equation}%
+  \renewcommand{\thefigure}{\thechapter\@arabic\c@figure}%
+  \renewcommand{\thetable}{\thechapter\@arabic\c@table}%
+  \renewcommand{\thesubfigure}{ \alph{subfigure})}%
+  }
+  
+
+
+
+  
+  %-- nesto drugacija definicija izgleda poglavlja (prve stranice poglavlja):
+\ifthenelse{\equal{\FSBsdizajn}{nalter}}{%
+  \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+                      \thispagestyle{plain}%
+                      \global\@topnum\z@
+                      \@afterindentfalse
+                      \secdef\@chapter\@schapter}
+  \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+                           \refstepcounter{chapter}%
+                           \typeout{\@chapapp\space\thechapter.}%
+                           \addcontentsline{toc}{chapter}%
+                                     {\protect\numberline{\thechapter}#1}%
+                      \else
+                        \addcontentsline{toc}{chapter}{#1}%
+                      \fi
+                      \chaptermark{#1}%
+                      \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                      \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                      \if@twocolumn
+                        \@topnewpage[\@makechapterhead{#2}]%
+                      \else
+                        \@makechapterhead{#2}%
+                        \@afterheading
+                      \fi}
+  \def\@makechapterhead#1{%
+    \vspace*{50\p@}%
+    {\parindent \z@ \raggedright \normalfont
+      \ifnum \c@secnumdepth >\m@ne
+          \raggedright\hfill %\centerline\hfill
+ %          \sffamily \@chapapp\space \thechapter
+          \@chapapp\space \thechapter
+ %          \par\nobreak \vspace{-8pt} \settowidth{\duljnaslpogl}{\Huge\bfseries #1} \hfill\rule{\duljnaslpogl}{1pt} \par\nobreak
+          \par\nobreak \vspace{-8pt} \settowidth{\duljnaslpogl}{\Huge\bfseries #1} \hfill\rule{\duljnaslpogl}{1pt} \par\nobreak
+          %\vskip 20\p@
+      \fi
+      \interlinepenalty\@M
+  %    \settowidth{\duljnaslpogl}{\Huge\bfseries #1} \hfill\rule{\duljnaslpogl}{1pt}
+  %    \par\nobreak
+      \hfill \Huge \bfseries #1\par\nobreak
+      \vskip 40\p@
+    }}
+  %\def\@schapter#1{\if@twocolumn
+  %                   \@topnewpage[\@makeschapterhead{#1}]%
+  %                 \else
+  %                   \@makeschapterhead{#1}%
+  %                   \@afterheading
+  %                 \fi}
+  %
+  %\def\@makeschapterhead#1{%
+  %  \vspace*{50\p@}%
+  %  {\parindent \z@ \raggedright
+  %    \normalfont
+  %    \interlinepenalty\@M
+  %    \Huge \bfseries  #1\par\nobreak
+  %    \vskip 40\p@
+  %  }}
+  } % zavrsetak promjena za alernativni dizajn
+  {} %u suprotnom nista
