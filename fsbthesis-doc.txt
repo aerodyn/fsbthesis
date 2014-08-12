@@ -1,6 +1,6 @@
 FSBthesis
 Milan Vrdoljak, FSB.Aero.Dept.
-ver.3.2, 11.8.2014.
+ver.3.2.2, 12.8.2014.
 
 
 Općenito
@@ -261,9 +261,9 @@ This work has the LPPL maintenance status `maintained'.
 The Current Maintainer of this work is Milan Vrdoljak.
 
 This work consists of the files fsbthesis.sty, unizg_sivi_t4s.png,
-unizg_plavi_t4.png, fsb_logo_n.png, fsb_logo_v.png, glavni.tex, uvod.tex,
-teorija.tex, rezultati.tex, zakljuc.tex, xampl.bib, glavni.pdf
-(nomentbl.ist - part of nomencl package)
+unizg_plavi_t2.png, fsb_logo_n.png, fsb_logo_v.png, glavni.tex, uvod.tex,
+teorija.tex, rezultati.tex, zakljuc.tex, xampl.bib, glavni.pdf,
+fsbthesis-doc.txt.
 
 
 
