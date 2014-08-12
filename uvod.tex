@@ -1,61 +1,50 @@
 \chapter{Uvod}
 
-Ovo poglavlje poslu\v{z}it \'{c}e za uvod u problem koji se rje\v{s}ava u ovom
-radu, te se postavlja odgovaraju\'{c}a hipoteza za doktorsku
-disertaciju.
+Ovo poglavlje poslužit će za uvod u problem koji se rješava u ovom
+radu, u slučaju doktorske disertacije ovdje se uobičajeno postavlja odgovarajuća
+hipoteza.
 
-\section{Primjer potpoglavlja}
+\section{Primjer podpoglavlja}
+Korištena literatura se popisuje u popisu literature pod poglavljem
+``Literatura'', a svaka od njih mora biti citirana bar jednom u tekstu, kao
+npr.\cite{mastersthesis-minimal}. Literatura mora biti popisana po redoslijedu
+pojavljivanja u tekstu za što se brine sami \LaTeX. 
+
 Tekst tekst tekst tekst tekst tekst primjer reference
-\cite{mastersthesis-minimal}, i jo\v{s} jedan \cite{inbook-full}.
-Tekst tekst tekst tekst tekst tekst 
+, i jo\v{s} jedan citat \cite{inbook-full}.
+Tekst tekst tekst tekst tekst tekst.
 
-Malo żu se pozvati kao u (šđćčž-ŠĐČĆŽ) na
-\begin{equation}\label{eq:ls-1}
-	C_l(y)=\frac{2\Gamma(y)}{\Vinf\;c(y)}\:,
-\end{equation}
-\nomenclature[acal]{$C_l$}{lokalni koeficijent uzgona}%\refeq}%
-\nomenclature[ecax]{$c$}{duljina tetive, [m]}%
-
-\subsection{Primjer potpotpoglavlja}
-
-Slijedi prvi primjer slike: FSB.(pogl.sliku~\ref{fig1})
-\nomenclature[Kf]{$FSB$}{Fakultet strojarstva i brodogradnje}%
-
+\subsection{Primjer dubljeg strukturiranja teksta}
+Slijedi prvi primjer slike (pogl.sliku~\ref{fig1})
 \begin{figure}[h]
   \centering
   \includegraphics[height=1.2cm]{fsb_logo_n}\\
-  \hangcaption{Primjer slike: kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
+  \hangcaption{Primjer slike -- logo FSB-a; kod slika primijenjeno je
+  zaglavlje s uvlačenjem, \emph{vise\'{c}e} zaglavlje s paketom \emph{hangcaption}}
   \label{fig1}
 \end{figure}
-
-\clearpage
-Slijedi mali primjer slike: SUZ.(pogledaj sliku~\ref{fig2})
-\nomenclature[Ks]{$SUZ$}{Sveučilište u Zagrebu}%
-%prvim slovom unutar uglate zagrade 'K' definiram da li je kratica ili indeks ili
-%akcent, a drugim slovom 's' mogu regulirati poredak pojavljivanja u popisu
-%oznaka (po abecedi, naravno)
-
+\nomenclature[Kf]{$FSB$}{Fakultet strojarstva i brodogradnje}%
+%
+Slijedi drugi mali primjer slike (pogledaj sliku~\ref{fig2}). U pravilu, na
+svaku se koja se pojavljuje treba pozvati u tekstu.
 \begin{figure}
   \centering
   \includegraphics[height=3.2cm]{unizg_plavi_t2}\\
-  \hangcaption{Primjer slike: kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
+  \hangcaption{Primjer slike -- logo Sveučilišta u Zagrebu.}
   \label{fig2}
 \end{figure}
 
-
-Pored slike dan je i primjer tablice.
-
+Pored slike dan je i primjer tablice (\ref{tablica}). Uobičajen je stil da se
+za tablice zaglavlje piše iznad same tablice (za razliku od slika). 
 \begin{table}[!h]
 \hangcaption{Primjer tablice}
 \label{tablica}
   \centering
-\begin{tabular}{|c c|} \hline
+\begin{tabular}{|c|c|} \hline
+    $x$ & $i$ \\\hline\hline
     A & 1 \\
     B & 2 \\
     C & 3 \\
     D & 4 \\ \hline
 \end{tabular}
 \end{table}
-

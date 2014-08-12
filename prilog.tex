@@ -1,0 +1,47 @@
+\chapter{Prvi prilog}
+Ovdje dolazi prilog, odnosno dodatak tekstu (slike, tehnički crteži, podaci,
+k\^ od, detaljni opisi, tablice, \ldots
+
+\newpage 
+\section{Malo poglavlje malog dodatka}
+\subsection{i još manje podpoglavlje}
+Ovo poglavlje poslu\v{z}it \'{c}e za dodatni opis koji nije nužan za sami
+tekst pa je stavljen kao prilog.
+
+\section{Primjer podpoglavlja}
+Tekst tekst tekst tekst tekst tekst primjer reference
+\cite{mastersthesis-minimal}, i jo\v{s} jedan \cite{inbook-full}.
+Tekst tekst tekst tekst tekst tekst.
+
+I ovdje mogu ići jednadžbe i pozivi na njih (\eqref{eq:ls-a1}) 
+
+\begin{equation}\label{eq:ls-a1}
+\beta ^2 \frac{{\partial ^2 \hat \phi }}
+{{\partial x^2 }} + \frac{{\partial ^2 \hat \phi }}
+{{\partial z^2 }} = 0\:,
+\end{equation}
+pri čemu je $\beta=\sqrt{1-Ma^2}$ uz Machov broj $Ma=\Vinf/a$.
+\nomenclature[gphi]{$\phi$}{potencijal brzine, [$\rm m^2/\rm s$]}%
+\nomenclature[ea]{$a$}{brzina zvuka, [m/s]}%
+
+\subsection{Još jedan podnaslov}
+Primjer slike u prilogu -- logo FSB-a (\ref{figa1})
+\begin{figure}[h]
+  \centering
+  \includegraphics[height=3.2cm]{fsb_logo_v}
+  \hangcaption{Primjer slike u prilogu}
+  \label{figa1}
+\end{figure}
+
+Pored slike dan je i primjer tablice (\ref{tablicaa}).
+\begin{table}[!h]
+\hangcaption{Primjer tablice u prilogu}
+\label{tablicaa}
+  \centering
+\begin{tabular}{|c|c|} \hline
+    A & 1 \\\hline
+    B & 2 \\\hline
+    C & 3 \\\hline
+    D & 4 \\ \hline
+\end{tabular}
+\end{table}

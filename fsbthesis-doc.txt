@@ -1,0 +1,275 @@
+FSBthesis
+Milan Vrdoljak, FSB.Aero.Dept.
+ver.3.2, 11.8.2014.
+
+
+Općenito
+--------
+FSBthesis je LaTeX stil za pripremu završnih, diplomskih radova i doktorskih
+disertacija, posebno prilagođen pravilima na Fakultetu strojarstva i
+brodogradnje Sveučilišta u Zagrebu (FSB); iako ga se lako prilagodi i drugim
+institucijama. Prilagođen je i izradi teksta diplomskog rada na engleskom
+jeziku - master's thesis. 
+
+Paket je testiran na nekoliko radova i doktorskih disertacija od prve verzije
+paketa (iz 2003.), ali uvijek postoji mogućnost ne-kompatibilnosti s drugim
+LaTeX paketima. Preporuka je da prije tiskanja doktorske disertacije
+provjeriti brojače i druge podatke na listu s bibliografskim podacima. 
+Pogledaj i niže poglavlje 'Greške, problemi, nove mogućnosti'.
+
+Ovaj paket se distribuira s nakanom da bude od pomoći, ali bez ikakve
+garancije (kao npr. u slučaju da zbog eventualnih poteškoća sa stilom ne
+uspijete predati rad u danom roku). Uporaba paketa je na vlastitu odgovornost.
+
+
+Instalacija
+-----------
+FSBthesis zahtjeva standardnu instalaciju LaTeX (točnije LaTeX2e), a baziran
+je na klasi 'report'.
+Za uporabu FSBthesis paketa potrebno je samo ostaviti fsbthesis.sty u
+direktoriji koji vidi vaša instalacija LaTeX (TDS, kao i za sve druge LaTeX
+pakete) - najjednostavnije u direktoriji s radnim/tex datotekama vašeg
+rada/disertacije. 
+Ukoliko imate poteškoća s uporabom FSBthesis, ako dobivate greške s naznakama
+nedostatka određenih paketa ili sl. pogledajte prvo pogledajte opis pod niže
+navedeno 'Detalji instalacije i preduvjeti'. 
+
+Testiranje instalacije najlakše je provesti na primjeru tex dokumenta
+glavni.tex.
+
+
+Primjena i prilagodba - brzi uvod!
+----------------------------------
+Najjednostavniji i najsigurniji način primjene paketa je prilagodbom primjera
+tex dokumenta glavni.tex. Pisanje tex dokumenta provodi se u utf-8 kodnoj
+stranici (utf-8 encoding). 
+
+U preambuli tex dokumenta potrebno je prilagoditi definicije naredbi svom
+radu, za završni rad:
+
+ \usepackage[zavrsni,avant]{fsbthesis}
+
+za diplomski rad:
+
+ \usepackage[diplomski,avant]{fsbthesis}
+
+i pored toga:
+
+ \title{NASLOV DIPLOMSKOG RADA}  %-- promijeniti naziv rada
+ \author{ime prezime}      %-- promijeniti autora rada
+ \date{Zagreb, May 2003}      % -- promijeniti datum: mjesec i godina - EN (za master opciju)
+ \renewcommand{\FSBautor}{Moje ime i prezime} %-- promijeniti ime autora
+ \renewcommand{\FSBmentor}{prof.~dr.~sc.~ime prezime} %-- promijenti titulu i ime mentora 
+ \renewcommand{\FSBgodina}{2003.} %-- promijeniti godinu obrane rada
+ \renewcommand{\FSBkljucnerijeci}{popis klju\v{c}nih rije\v{c}i: maksimalno do deset \ldots} %-- promijeniti popis kljucnih rijeci
+ \renewcommand{\FSBkeywords}{list of the keywords: up to ten words} %-- promijeniti popis kljucnih rijeci na engleskom
+
+
+Primjena i prilagodba - detaljnije
+----------------------------------
+Preduvjet primjene fsbthesis paketa je uporaba 'report' LaTeX klase - dakle
+prva linija vašeg tex dokumenta treba biti nalik na 
+
+ \documentclass[a4paper,12pt]{report})
+
+Primjena FSBthesis paketa je uobičajena kao za sve LaTeX2e pakete:
+
+ \usepackage{fsbthesis}
+
+S ovakvim (temeljnim/defaultnim) pozivom ostvaruje se 'avant' vizualni stil za
+doktorsku disertaciju. Za izradu završnog rada potrebno je definirati opciju
+paketa:
+
+ \usepackage[zavrsni,avant]{fsbthesis}
+
+Sve opcije i pozivi paketa mogu se pogledati niže pod naslovom 'Opcije
+paketa'.
+
+Slijed formalnih elemenata završnog, diplomskog rada (kao i doktorske
+disertacije) posloženi su u primjeru tex datoteke (glavni.tex). 
+Za potrebe usklađivanja sa institucionalnim pravilima definirane su naredbe 
+ \fsbkorice (generira list za korice rada)
+ \fsbprvilist (generira prvi list iza korica rada)
+kao i niz okolina (pogledaj pod 'Okoline definirane paketom').
+
+Preporuka je strukturirati tex datoteke po poglavljima (ili po nekim drugim
+segmentima teksta) - kako je to napravljeno u primjeru glavni.tex (sa
+uvod.tex, teorija.tex, ...). Na odgovarajućim mjestima te datoteke se
+uključuju u glavni dokument (glavni.tex) s naredbom 
+ \input{uvod.tex}
+
+Za izradu popisa oznaka moguće je primijeniti automatiziran način pomoću
+paketa nomencl: u tekstu (na mjestu gdje se uvodi neka nova oznaka, kratica,
+indeks ili sl.) potrebno je staviti naredbu
+\nomenclature[acal]{$c_l$}{lokalni koeficijent uzgona}%
+pri tome je:
+ [acal] - labela oznake: u popisu se oznake razvrstavaju po abecedi temeljem
+	ove labele; pri tome je prvo slovo 'a' prefiks za latinične oznake (ako se
+	žele razlikovati oznake s malim i velikim slovima 'a' se može koristiti za
+	velika slova, a 'e' za mala; 'g' se koristi za grčke oznake, 'K' za
+	kratice, 'I' za indekse, 'T' za akcente);
+ {$c_l$} - prestavlja samu oznaku - u ovom slučaju matematički tekst;
+ {lokalni koeficijent uzgona} - opis oznake (uobičajeno se dopisuje i mjerna
+	jedinica, ako nije bezdimenzionalna - kao u ovom primjeru)
+
+Da bi se sve oznake u radu pojavile u popisu oznaka potrebno je pokrenuti
+naredbu 'makeindex' kako je opisano nize u poglavlju 'Uporaba paketa'.
+Ako se želi u popisu oznaka navesti i broj jednadžbe u kojoj se pojavljuje
+određena oznaka potrebno je (odmah iz željene jednadžbe) staviti
+ \nomenclature[acal]{$c_l$}{lokalni koeficijent uzgona\nomrefeq}%
+Paket koji je nužan za izradu ovakvog popisa oznaka je 'nomencl' i treba
+biti u vašoj instalaciji LaTeX-a s verzijom 4.2.
+
+Naredba \ver definira oznaku verzije teksta, npr.
+ \renewcommand{\ver}{\mbox{ver.8.1.a}} 
+koja se ispisuje uz draft opciju (pogledaj niže pod 'Opcije paketa'.
+
+Za tekst na engleskom jeziku (opcija master) nužno je pozvati paket babel:
+ \usepackage[english,croatian]{babel}
+te napraviti dodatne prilagodbe (npr. otkomentirati 'izjavu' na engleskom
+jeziku) kako je navedeno u primjeru glavni.tex.
+
+Za tekst doktorske disertacije nužno je otkomentirati naredbu \fsbbiblist koja
+generira bibliografski list te za njega definirati naredbe poput \FSBbibudk,
+\FSBbibznpolje, ... (prema primjeru glavni.tex).
+
+
+Uporaba paketa
+--------------
+Kao i za sve druge LaTeX dokumente procedura izrade pdf-a iz tex dokumenta
+(dokumenata) je ista (ovdje na primjeru tex dokumenta glavni.tex):
+
+ pdflatex glavni
+ bibtex glavni
+ makeindex glavni.nlo -s nomencl.ist -o glavni.nls
+ pdflatex glavni
+ pdflatex glavni
+
+Naredba makeindex je nužna ako se za popis oznaka koristi gore opisana
+procedura primjenom nomecl paketa.
+
+
+Opcije paketa
+-------------
+Pozivom paketa
+
+ \usepackage[zavrsni,draft]{fsbthesis}
+
+pozivaju se opcije 'zavrsni' i 'draft'.
+
+Paket ima četiri osnovne opcije:
+
+ zavrsni
+ diplomski
+ master (master's thesis)
+ doktorat (temeljna/defaultna opcija)
+
+i četiri opcije kojima se definira vizualni stil
+
+ avant (temeljna/defaultna opcija)
+ alter
+ klasik
+ nalter
+
+te opciju za radne verzije teksta
+
+ draft (na naslovnici ispisuje verziju teksta definiranu naredbom \ver te
+	datum; ako se koristi s temeljnom/defaultnom opcijom 'avant' isto ispisuje
+	i u zaglavlju stranica).
+
+
+Okoline definirane paketom
+--------------------------
+Kao i druge okoline u LaTeX funkcioniraju, npr.
+\begin{sazetak}
+  ...
+\end{sazetak}
+
+Okoline koje su (re)definirane FSBthesis paketom:
+
+ sazetak
+ abstract
+ prosirenisazetak (kada je tekst diplomskog rada na engleskom jeziku)
+ zahvala
+ izjava (nije je potrebno mijenjati - osim ako se radi diplomski rad na 
+	engleskom jeziku - master's thesis)
+ predgovor (samo za doktorat, nije uobičajen za diplomski i završni rad)
+ zivotopis i shortbio (samo za doktorat, nisu uobičajeni za diplomski i
+	završni rad)
+
+
+Dokumentacija
+-------------
+Dokumentacija je u pripremi, trenutno je ovaj tekst jedina dokumentacija, a za
+detalje pogledati primjer glavni.tex i fsbthesis.sty.
+
+
+Detalji instalacije i preduvjeti
+--------------------------------
+Za punu funkcionalnost FSBthesis - potrebni su sljedeći LaTeX paketi (mahom se
+radi o standardnim paketima koje bi trebala imati svaka LaTeX instalacija)
+koji se pozivaju iz same fsbthesis.sty:
+ subfigure
+ ifthen
+ longtable
+ fancyhdr
+ indentfirst
+ array
+ ifpdf
+ graphicx
+ geometry.
+
+Ukoliko neke od ovih paketa koristite u svom tex dokumentu nije ga potrebno i 
+tamo pozivati. Pored ovih navedenih paketa u tex dokumentu (glavni.tex)
+potrebno je primijeniti:
+ inputenc
+ hangcaption
+ nomencl.
+
+Uz to u primjeru tex dokumenta (glavni.tex) neki su paketi opcionalni:
+amsmath, tikz, xspace, url. 
+
+
+Greške, problemi, nove mogućnosti
+----------------------------------
+Iako je paket duže vremena u uporabi moguće je da bude grešaka i problema. 
+Pogledajte .log datoteku u smislu identificiranja problema. Ako ste otkrili
+grešku javite se emailom sa što više informacija i što ranije. Ukoliko se
+greška odnosi na rezultirajući dokument LaTeX-a pošaljite mi .log datoteku
+vašeg glavnog tex dokumenta, ali budite spremni i na mogućnost da mi pošaljete
+kompletan LaTeX kod, ukoliko za to bude postojala potreba. 
+U slučaju da imate prijedloge za poboljšanja ovog paketa pošaljite mi email sa
+što više detalja. 
+U spomenutim slučajevima emailove šaljite na milan.vrdoljak_at_fsb.hr, a 
+u predmetu emaila navedite 'fsbthesis'.
+
+
+------------------------------------------------------------------------
+FSBthesis. fsbthesis.sty
+Copyright 2003-2014. Milan Vrdoljak, milan.vrdoljak_at_fsb.hr, FSB.Aero.Dept.
+
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either version 1.3
+of this license or (at your option) any later version.
+The latest version of this license is in
+  http://www.latex-project.org/lppl.txt
+and version 1.3 or later is part of all distributions of LaTeX
+version 2005/12/01 or later.
+
+This work has the LPPL maintenance status `maintained'.
+
+The Current Maintainer of this work is Milan Vrdoljak.
+
+This work consists of the files fsbthesis.sty, unizg_sivi_t4s.png,
+unizg_plavi_t4.png, fsb_logo_n.png, fsb_logo_v.png, glavni.tex, uvod.tex,
+teorija.tex, rezultati.tex, zakljuc.tex, xampl.bib, glavni.pdf
+(nomentbl.ist - part of nomencl package)
+
+
+
+Povijest
+--------
+ver.1: samo za doktorske disertacije i tadašnje magistarske radove
+ver.2: dodane opcije za diplomski rad
+ver.3: primjenjen geometry paket, dodana opcija za završni rad i za mastster's
+thesis.

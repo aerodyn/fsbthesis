@@ -17,7 +17,7 @@
 	% ili npr. \usepackage[diplomski,avant,draft]{fsbthesis} % za diplomski rad uz draft opciju - dodaje oznake datuma/ver.
     % ili npr. \usepackage[klasik]{fsbthesis} %za klasican izgled doktorata
 	% ili npr. \usepackage[master,avant]{fsbthesis} za dipl.rad na engl. ondnosno master's thesis
-	% ... za opis svih opicija pogledaj fsbthesis.sty (nazalost nije osvjezeno zadnjim promjenama)
+	% ... za opis svih opicija pogledaj fsbthesis-doc.txt i fsbthesis.sty 
 	% za vizualni izgled rada na raspolaganju su tri opcije: avant, alter i klasik
 %\usepackage{t1enc}
 \usepackage{tikz}
@@ -58,6 +58,8 @@
 % \renewcommand{\FSBpdfbrojrefs}{111}
 \renewcommand{\thestrana}{11}
 
+\hypersetup{pdftitle=\@title,pdfauthor=\@author}
+%\hypersetup{colorlinks=false} % za print-verziju teksta bez obojanih linkova u pdf-u
 \renewcommand{\ver}{\mbox{ver.2-01}} % moja verzija ovog rada (od interesa uz draft opciju)
 
 \makeatother
@@ -145,14 +147,15 @@
 
 %-- promijeniti sazetak
 \begin{sazetak}
-  \noindent Kratki sa\v{z}etak rada na hrvatskom jeziku: najvi\v{s}e jedna stranica
+  \noindent Kratki sa\v{z}etak rada na hrvatskom jeziku: najvi\v{s}e jedna
+  stranica, zapisan u jednom paragrafu 
   \ldots Tekst tekst tekst tekst tekst tekst.
 \end{sazetak}
 
 %-- promijenti sazetak na EN
 \begin{abstract}
   \noindent Short summary of the thesis in one foreign language (english): up
-  to one page \ldots Tekst tekst tekst tekst tekst tekst.
+  to one page in single paragraph \ldots Tekst tekst tekst tekst tekst tekst.
 \end{abstract}
 
 
@@ -280,92 +283,9 @@
 \addtocounter{brojtablica}{\arabic{table}}
 
 \appendix
-\chapter{Moj prvi dodatak}
+\input prilog.tex
 \addtocounter{brojslika}{\arabic{figure}}
 \addtocounter{brojtablica}{\arabic{table}}
-Tu dolazi prvi prilog odnosno dodatak tekstu (slike, podaci, kod, detaljni
-opisi, tablice, \ldots
-\newpage 
-Pa ni na ovoj stranici!
-\section{Malo poglavlje malog dodatka}
-\subsection{i još manje podpoglavlje}
-Ovo poglavlje poslu\v{z}it \'{c}e za uvod u problem koji se rje\v{s}ava u ovom
-radu, te se postavlja odgovaraju\'{c}a hipoteza za doktorsku
-disertaciju.
-
-\section{Primjer potpoglavlja}
-Tekst tekst tekst tekst tekst tekst primjer reference
-\cite{mastersthesis-minimal}, i jo\v{s} jedan \cite{inbook-full}.
-Tekst tekst tekst tekst tekst tekst 
-
-Malo ću se pozvati (\eqref{eq:ls-a1}) kao u šđčćžŠĐČĆŽ na 
-\begin{equation}\label{eq:ls-a1}
-	C_l(y)=\frac{2\Gamma(y)}{\Vinf\;c(y)}\:,
-\end{equation}
-\nomenclature[acal]{$C_l$}{lokalni koeficijent uzgona}%\refeq}%
-\nomenclature[ecax]{$c$}{duljina tetive, [m]}%
-
-\subsection{Primjer potpotpoglavlja}
-
-Slijedi prvi primjer slike: FSB.(pogl.sliku~\ref{figa1})
-\nomenclature[Kf]{$FSB$}{Fakultet strojarstva i brodogradnje}%
-
-\begin{figure}[h]
-  \centering
-  \includegraphics[height=1.2cm]{fsb_logo_n}\\
-  \hangcaption{Primjer slike: kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
-  \label{figa1}
-\end{figure}
-
-\clearpage
-Slijedi mali primjer slike: SUZ.(pogledaj sliku~\ref{figa2})
-\nomenclature[Ks]{$SUZ$}{Sveučilište u Zagrebu}%
-%prvim slovom unutar uglate zagrade 'K' definiram da li je kratica ili indeks ili
-%akcent, a drugim slovom 's' mogu regulirati poredak pojavljivanja u popisu
-%oznaka (po abecedi, naravno)
-
-\begin{figure}
-  \centering
-  \includegraphics[height=3.2cm]{unizg_sivi_t4s}\\
-  \hangcaption{Primjer slike: kod ove slike primjenjeno je
-  \emph{vise\'{c}e} zaglavlje -- hangcaption}
-  \label{figa2}
-\end{figure}
-
-
-Pored slike dan je i primjer tablice (\ref{tablicaa}).
-
-\begin{table}[!h]
-\hangcaption{Primjer tablice}
-\label{tablicaa}
-  \centering
-\begin{tabular}{|c c|} \hline
-    A & 1 \\
-    B & 2 \\
-    C & 3 \\
-    D & 4 \\ \hline
-\end{tabular}
-\end{table}
-
-\chapter{i drugi \dots}
-\addtocounter{brojslika}{\arabic{figure}}
-\addtocounter{brojtablica}{\arabic{table}}
-\dots Opet ništa osim ove slike:~\ref{dodatna}
-\begin{figure}
-  \centering
-  \includegraphics[height=3.2cm]{fsb_logo_v}
-  \hangcaption{Primjer slike u prilogu}
-  \label{dodatna}
-\end{figure}
-\newpage
-\section{Samo prašim po testu}
-Ovo poglavlje poslu\v{z}it \'{c}e za uvod u problem koji se rje\v{s}ava u ovom
-radu, te se postavlja odgovaraju\'{c}a hipoteza za doktorsku
-disertaciju.
-
-
-\nomenclature[Kf]{$dod$}{dummy dodatak}%
 
 % literatura:
 \newpage
@@ -380,5 +300,3 @@ disertaciju.
 
 %-- naredba kojom se generira popis oznaka
 % makeindex glavni.nlo -s nomencl.ist -o glavni.nls 
-
-
